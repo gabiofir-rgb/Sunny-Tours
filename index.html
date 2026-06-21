@@ -11,51 +11,46 @@
         .container { width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; }
         
         /* מסך פתיחה - HERO */
-        .hero { background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=800&q=80') center/cover; color: white; padding: 50px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+        .hero { background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=800') center/cover; color: white; padding: 60px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
         .badge { background-color: #f59e0b; color: #0f172a; display: inline-block; padding: 6px 16px; font-weight: bold; font-size: 13px; border-radius: 20px; margin-bottom: 15px; }
-        .hero h1 { font-size: 26px; font-weight: 800; margin-bottom: 12px; line-height: 1.3; }
+        .hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 12px; line-height: 1.3; }
         .hero p { font-size: 15px; color: #cbd5e1; margin-bottom: 25px; }
         
         .btn { display: block; width: 100%; background-color: #f59e0b; color: #0f172a; text-align: center; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 16px; text-decoration: none; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25); }
         
-        /* כרטיס סוכן אישי */
+        /* כרטיס סוכן */
         .agent-card { background: white; border-radius: 24px; padding: 25px 20px; margin-top: -30px; margin-bottom: 30px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; text-align: center; }
-        .agent-image-container { position: relative; width: 110px; height: 110px; margin: 0 auto 15px auto; }
-        .agent-image-holder { width: 100%; height: 100%; background-color: #e2e8f0; border-radius: 50%; overflow: hidden; border: 3px solid #f59e0b; display: flex; align-items: center; justify-content: center; }
+        .agent-image-holder { width: 110px; height: 110px; background-color: #e2e8f0; border-radius: 50%; overflow: hidden; border: 3px solid #f59e0b; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; }
         .agent-image-holder img { width: 100%; height: 100%; object-fit: cover; }
         .agent-image-holder i { font-size: 45px; color: #94a3b8; }
         
-        .section-title { font-size: 20px; font-weight: 800; margin: 35px 0 15px 0; color: #0f172a; border-right: 4px solid #f59e0b; padding-right: 12px; }
+        .section-title { font-size: 22px; font-weight: 800; margin: 40px 0 15px 0; color: #0f172a; border-right: 5px solid #f59e0b; padding-right: 12px; }
         .section-subtitle { font-size: 14px; color: #64748b; margin-top: -10px; margin-bottom: 20px; padding-right: 16px; }
         
-        /* למה איתנו */
-        .features-grid { background: white; border-radius: 20px; padding: 20px; border: 1px solid #e2e8f0; }
-        .feature-item { display: flex; gap: 15px; margin-bottom: 18px; }
-        .feature-item:last-child { margin-bottom: 0; }
-        .feature-icon { width: 40px; height: 40px; background: #eff6ff; color: #2563eb; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-        .feature-text h4 { font-size: 15px; font-weight: bold; color: #0f172a; margin-bottom: 2px; }
-        .feature-text p { font-size: 13px; color: #64748b; }
+        /* סקירה כללית גאורגיה Overview */
+        .overview-box { background: white; border-radius: 20px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 25px; }
+        .overview-text { font-size: 14px; color: #475569; margin-bottom: 15px; text-align: justify; }
+        
+        /* כרטיסי אתרים מרכזיים ומגזין */
+        .destination-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; margin-bottom: 15px; display: flex; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .dest-img { width: 120px; height: 120px; object-fit: cover; flex-shrink: 0; }
+        .dest-info { padding: 15px; flex-grow: 1; }
+        .dest-info h4 { font-size: 16px; font-weight: bold; color: #0f172a; margin-bottom: 5px; }
+        .dest-info p { font-size: 13px; color: #64748b; line-height: 1.4; }
 
-        /* קוביות דילים דינמיות */
+        /* קוביות דילים */
         .deal-card { background: white; border-radius: 20px; margin-bottom: 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03); overflow: hidden; }
-        .deal-img-box { height: 180px; width: 100%; background-position: center; background-size: cover; background-color: #cbd5e1; }
+        .deal-img-box { height: 190px; width: 100%; background-position: center; background-size: cover; }
         .deal-padding { padding: 20px; }
         .deal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .deal-tag { background: #fef3c7; color: #b45309; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; }
         .deal-price { font-size: 24px; font-weight: 900; color: #1e3a8a; }
         .deal-title { font-size: 18px; font-weight: bold; margin-bottom: 12px; color: #0f172a; }
-        .deal-list { list-style: none; margin-bottom: 20px; }
+        .deal-list { list-style: none; margin-bottom: 25px; }
         .deal-list li { font-size: 13px; color: #475569; margin-bottom: 8px; display: flex; align-items: start; gap: 8px; }
         .deal-list li i { color: #10b981; margin-top: 4px; }
-        .btn-deal { background: #0f172a; color: white; padding: 12px; font-size: 14px; margin-top: 10px; }
-
-        /* גלריית תמונות יציבה */
-        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .gallery-item { position: relative; border-radius: 12px; overflow: hidden; height: 120px; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-        .gallery-caption { position: absolute; bottom: 0; right: 0; left: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 8px 10px; font-size: 11px; }
-
-        /* שאלון */
+        
+        /* שאלון התאמה */
         .quiz-box { background: #1e293b; color: white; padding: 25px 20px; border-radius: 24px; margin-bottom: 25px; }
         .quiz-step h3 { font-size: 16px; color: #f59e0b; margin-bottom: 18px; font-weight: bold; }
         .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -63,46 +58,55 @@
         .quiz-input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #475569; background: #334155; color: white; margin-bottom: 12px; text-align: right; font-size: 14px; }
         .hidden { display: none; }
 
-        /* המלצות דינמיות */
-        .review-card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 15px; border: 1px solid #e2e8f0; position: relative; }
+        /* עדויות וטסטמוניאלס */
+        .review-card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 15px; border: 1px solid #e2e8f0; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.01); }
         .review-card i.fa-quote-left { position: absolute; left: 20px; top: 15px; color: #f1f5f9; font-size: 32px; z-index: 1; }
-        .review-text { font-size: 13px; color: #475569; position: relative; z-index: 2; margin-bottom: 15px; }
-        .review-user { display: flex; align-items: center; gap: 10px; }
-        .review-avatar { width: 35px; height: 35px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #64748b; font-weight: bold; }
+        .review-text { font-size: 13px; color: #475569; position: relative; z-index: 2; margin-bottom: 15px; font-style: italic; }
+        .review-user { display: flex; align-items: center; gap: 10px; position: relative; z-index: 2; }
+        .review-avatar { width: 40px; height: 40px; background: #eff6ff; color: #2563eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; }
 
-        /* שאלות ותשובות */
-        .faq-item { background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 10px; overflow: hidden; }
-        .faq-btn { width: 100%; text-align: right; padding: 15px; font-weight: bold; font-size: 14px; color: #0f172a; background: none; border: none; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-        .faq-ans { padding: 0 15px 15px 15px; font-size: 13px; color: #475569; border-top: 1px solid #f1f5f9; background: #f8fafc; }
-
+        /* יתר השירות */
+        .features-grid { background: white; border-radius: 20px; padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 25px; }
+        .feature-item { display: flex; gap: 15px; margin-bottom: 18px; }
+        .feature-item:last-child { margin-bottom: 0; }
+        .feature-icon { width: 40px; height: 40px; background: #fef3c7; color: #b45309; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        
         footer { background: #0f172a; color: #94a3b8; padding: 30px 20px; text-align: center; font-size: 12px; border-top-left-radius: 20px; border-top-right-radius: 20px; margin-top: 40px; }
-        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; width: 55px; height: 55px; background-color: #25d366; color: white; border-radius: 50%; text-align: center; font-size: 28px; z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; width: 55px; height: 55px; background-color: #25d366; color: white; border-radius: 50%; text-align: center; font-size: 28px; z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
     </style>
 </head>
 <body>
 
     <div class="hero">
         <div class="badge">סאני טורס - Sunny Tours</div>
-        <h1>גאורגיה שעוד לא הכרתם</h1>
-        <p>דילים ייחודיים וחבילות בוטיק שנתפרות במיוחד עבורכם עם ליווי אישי מאלף עד ת'.</p>
+        <h1 id="hero-title">גאורגיה שעוד לא הכרתם</h1>
+        <p id="hero-desc">חופשות בוטיק ודילים ייחודיים שנתפרים במיוחד עבורכם עם ליווי אישי מאלף עד ת'.</p>
         <a href="#quiz-sec" class="btn"><i class="fa-solid fa-compass ml-1"></i> התאמת טיול אישי ב-3 שאלות</a>
     </div>
 
     <div class="container">
 
         <div class="agent-card">
-            <div class="agent-image-container">
-                <div class="agent-image-holder">
-                    <img src="gabi.jpg" id="agent-pic" alt="גבי שמש" onerror="this.style.display='none'; document.getElementById('agent-icon').classList.remove('hidden');">
-                    <i id="agent-icon" class="fa-solid fa-user-tie hidden"></i>
-                </div>
+            <div class="agent-image-holder">
+                <img src="gabi.jpg" id="agent-pic" alt="גבי שמש" onerror="this.style.display='none'; document.getElementById('agent-icon').classList.remove('hidden');">
+                <i id="agent-icon" class="fa-solid fa-user-tie hidden"></i>
             </div>
             <h2 style="font-size: 22px; font-weight: 800; color: #0f172a;">גבי שמש</h2>
             <p style="color: #f59e0b; font-weight: bold; font-size: 14px; margin-bottom: 15px;">המלווה והסוכן האישי שלכם לגאורגיה</p>
             <p style="font-size: 14px; color: #475569; text-align: justify;">
-                שלום לכם! קוראים לי גבי שמש, ומאחורי שנים של היכרות עמוקה עם גאורגיה – הפנינה של חבל הקווקז. ב-<b>Sunny Tours</b> המטרה שלי היא להעניק לכם חופשה שהיא חוויה לכל החיים. אני מטפל אישית בבחירת המלונות, תכנון מסלול הבוטיק, הטיסות והלוגיסטיקה, ונמצא איתכם בקשר וואטסאפ רציף לכל שאלה בזמן הטיול.
+                שלום לכם! קוראים לי גבי שמש, ומאחורי שנים של היכרות עמוקה עם גאורגיה – הפנינה של חבל הקווקז. ב-<b>Sunny Tours</b> המטרה שלי היא להעניק לכם חופשה שהיא חוויה לכל החיים. אני מטפל אישית בבחירת המלונות, תכנון מסלול הבוטיק, הטיסות והלוגיסטיקה.
             </p>
         </div>
+
+        <div class="section-title">הכירו את גאורגיה (גרוזיה)</div>
+        <div class="section-subtitle">השילוב המושלם בין נופים פראיים, קולינריה היסטורית ותרבות יין</div>
+        <div class="overview-box">
+            <p class="overview-text" id="overview-content"></p>
+        </div>
+
+        <div class="section-title">אתרי החובה בגאורגיה</div>
+        <div class="section-subtitle">הנקודות המרכזיות שאנחנו משלבים במסלול שלכם</div>
+        <div id="destinations-container"></div>
 
         <div class="section-title">למה לבחור בסאני טורס?</div>
         <div class="features-grid">
@@ -120,30 +124,11 @@
                     <p>לא מהמרים על הלינה. כל המלונות נבחרו בקפידה לפי מיקום ורמת אירוח גבוהה.</p>
                 </div>
             </div>
-            <div class="feature-item">
-                <div class="feature-icon"><i class="fa-solid fa-route"></i></div>
-                <div class="feature-text">
-                    <h4>מסלולים נסתרים מהעין</h4>
-                    <p>מסעדות מקומיות, יקבי בוטיק ותצפיות נוף פראיות שרק המקומיים מכירים.</p>
-                </div>
-            </div>
         </div>
 
         <div id="deals-sec" class="section-title">דילים וחבילות נבחרות</div>
         <div class="section-subtitle">החבילות המבוקשות ביותר (המחיר כולל טיסות ומלונות)</div>
         <div id="deals-container"></div>
-
-        <div class="section-title">רגעים מגאורגיה</div>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=300&q=80" alt="חבל היין">
-                <div class="gallery-caption">חבל היין קאחטי</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=300&q=80" alt="מאכל מקומי חצ'אפורי">
-                <div class="gallery-caption">קולינריה אותנטית משובחת</div>
-            </div>
-        </div>
 
         <div id="quiz-sec" class="section-title">שאלון התאמה אישי תוך דקה</div>
         <div class="quiz-box">
@@ -178,28 +163,9 @@
             </div>
         </div>
 
-        <div class="section-title">מטיילים משתפים וממליצים</div>
+        <div class="section-title">מטיילים משתפים וממליצים (Testimonials)</div>
+        <div class="section-subtitle">חוות דעת אמיתיות ממטיילים שחזרו מחופשת בוטיק איתי</div>
         <div id="reviews-container"></div>
-
-        <div class="section-title">שאלות נפוצות</div>
-        <div class="faq-item">
-            <button onclick="toggleFaq(1)" class="faq-btn">
-                <span>איך מתבצע תהליך העבודה מול סוכן פרטי?</span>
-                <i id="faq-icon-1" class="fa-solid fa-chevron-down"></i>
-            </button>
-            <div id="faq-ans-1" class="hidden faq-ans">
-                אנחנו מתחילים בשיחת אפיון קצרה בוואטסאפ, מבינים מה סגנון החופשה שלכם. לאחר מכן אני מציג לכם תוכנית מובנית הכוללת טיסות, מלונות נבחרים ומסלול מוצע, ומעדכנים אותה עד שהיא מושלמת עבורכם.
-            </div>
-        </div>
-        <div class="faq-item">
-            <button onclick="toggleFaq(2)" class="faq-btn">
-                <span>מה קורה במקרה של שינוי או ביטול בטיסה?</span>
-                <i id="faq-icon-2" class="fa-solid fa-chevron-down"></i>
-            </button>
-            <div id="faq-ans-2" class="hidden faq-ans">
-                זהו בדיוק היתרון של סוכן פרטי! אני מטפל מול חברות התעופה והספקים ישירות כדי למצוא לכם פתרון מהיר, חלופי או זיכוי בהתאם למדיניות.
-            </div>
-        </div>
 
     </div>
 
@@ -214,17 +180,39 @@
     </a>
 
     <script>
-        // ==========================================
-        // הממשק הניהולי שלך לשליטה מלאה בתוכן האתר!
-        // ==========================================
+        // ===================================================
+        // 🎛️ לוח הבקרה הבלעדי שלך - שנה כאן והאתר יתעדכן מעצמו!
+        // ===================================================
 
-        // 1. רשימת הדילים והחבילות באתר - כאן תוכל להוסיף, למחוק או לערוך!
+        // א. טקסט סקירה כללית (Overview) של המדינה
+        const GEORGIA_OVERVIEW = "גאורגיה (גרוזיה) היא אחת המדינות המרתקות והיפות בעולם, המציעה שילוב פראי ומהפנט בין הרי הקווקז המושלגים, עמקים ירוקים שופעי יקבי בוטיק עתיקים, והיסטוריה מרתקת. המטבח הגאורגי נחשב לחוויה קולינרית עולמית בזכות מאפים מפורסמים כמו החצ'אפורי והחינקלי, לצד מסורת יין בת למעלה מ-8,000 שנה. בין אם אתם מחפשים סוף שבוע קולינרי קסום בסמטאות של טביליסי העתיקה, חופשת סקי ונופים בגודאורי, או מסע ג'יפים אתגרי בלב הטבע הפראי - גאורגיה מספקת חופשה בלתי נשכחת לכל סוגי המטיילים.";
+
+        // ב. רשימת האתרים המרכזיים ומגזין התמונות (טביליסי, גודאורי, קולינריה וכו')
+        const MY_DESTINATIONS = [
+            {
+                name: "טביליסי העתיקה (Tbilisi)",
+                desc: "בירת המדינה המשלבת סמטאות ציוריות עתיקות, מרחצאות גופרית היסטוריים, שווקי פשפשים תוססים, חיי לילה מודרניים ומסעדות שף גאורגיות מעולות.",
+                imageUrl: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=400"
+            },
+            {
+                name: "גודאורי והקווקז הגבוה (Gudauri)",
+                desc: "עיירת סקי ונופש מרהיבה המשמשת כנשמת אפיים של חובבי הטבע. נופים אלפיניים עוצרי נשימה, תצפיות פנורמיות פראיות וטיולי ג'יפים ואטרקציות שטח.",
+                imageUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400"
+            },
+            {
+                name: "תרבות היין והקולינריה (Khachapuri & Wine)",
+                desc: "מסע קולינרי בשילוב המאפים המקומיים המפורסמים וביקור ביקבי בוטיק אותנטיים בחבל קאחטי, המייצרים יין בכדי חרס (קווstatus) לפי מסורת עתיקה יומיות.",
+                imageUrl: "https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=400"
+            }
+        ];
+
+        // ג. רשימת הדילים והחבילות (כאן מעדכנים מחירים ופרטים)
         const MY_DEALS = [
             {
                 tag: "סופ"ש עירוני וקולינרי",
                 title: "חבילת בוטיק קולינרית בטביליסי",
                 price: "649$",
-                imageUrl: "https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=600&q=80",
+                imageUrl: "https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=600",
                 bullets: [
                     "טיסות ישירות הלוך ושוב (כולל טרולי וכבודה)",
                     "3 לילות במלון בוטיק 4 כוכבים מעוצב במרכז העיר",
@@ -235,12 +223,12 @@
             },
             {
                 tag: "הרפתקה וטבע פראי",
-                title: "טיול ג'יפים חווייתי בקווקז הגבוה",
+                title: "טיול ג'יפים חווייתי בקווקז הגבוה והרי גודאורי",
                 price: "1,199$",
-                imageUrl: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+                imageUrl: "https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=600",
                 bullets: [
                     "טיסות ישירות והעברות שדה מלאות",
-                    "6 לילות בריזורטים מול נוף הפסגות בקזבגי",
+                    "6 לילות בריזורטים מול נוף הפסגות בקזבגי וגודאורי",
                     "רכב ג'יפ 4X4 מרווח וחדיש צמוד אליכם לכל התקופה",
                     "ספר מסלול דיגיטלי אישי עם מפות והמלצות אטרקציות"
                 ],
@@ -248,32 +236,49 @@
             }
         ];
 
-        // 2. רשימת ההמלצות והאנשים שמספרים על החוויה - ערוך כאן חופשי!
+        // ד. מערכת עדויות לקוחות (Testimonials / טסטמוניאלס) - הוסף כאן חופשי!
         const MY_REVIEWS = [
             {
                 text: "גבי בנה לנו טיול משפחתי מושלם לגאורגיה! המלונות היו בדיוק בטעם שלנו, והזמינות שלו בוואטסאפ לכל שאלה במהלך הטיול נתנה לנו שקט נפשי מטורף. מומלץ בחום למי שרוצה ראש שקט!",
-                initials: "רכ",
                 name: "רונית ואילן כהן",
                 tripType: "טיילו בטביליסי וקאחטי"
             },
             {
-                text: "סגרנו דרך סאני טורס טיול ג'יפים עם חברים לקווקז. הכל תוקתק מאלף עד ת'. המסלול שגבי בנה לקח אותנו למקומות נסתרים שבחיים לא היינו מגיעים אליהם לבד. שירות מעל המצופה.",
-                initials: "תל",
+                text: "סגרנו דרך סאני טורס טיול ג'יפים עם חברים לקווקז ולגודאורי. הכל תוקתק מאלף עד ת'. המסלול שגבי בנה לקח אותנו למקומות נסתרים שבחיים לא היינו מגיעים אליהם לבד. שירות מעל המצופה.",
                 name: "תומר לוי",
                 tripType: "טיול חברים בהרי הקווקז"
+            },
+            {
+                text: "הגענו לגבי במטרה לעשות סיור קולינרי ותרבותי בטביליסי. הדיל היה מעולה, המלון היה ברמה גבוהה מאוד וההמלצות של גבי על המסעדות המקומיות היו פשוט בינגו! נחזור בטוח.",
+                name: "מיכל ודוד שפירא",
+                tripType: "חופשה זוגית בטביליסי"
             }
         ];
 
-
-        // ==========================================
-        // מנגנון הטעינה האוטומטי (אין צורך לגעת מכאן ומטה)
-        // ==========================================
+        // ===================================================
+        // מנגנון הזרקת הנתונים האוטומטי (אין צורך לגעת בקוד הבא)
+        // ===================================================
         
-        function renderWebsiteContent() {
-            // טעינת דילים
+        function loadContent() {
+            // הזרקת אוברביו
+            document.getElementById('overview-content').innerText = GEORGIA_OVERVIEW;
+
+            // הזרקת אטרקציות ואתרים מרכזיים
+            const destContainer = document.getElementById('destinations-container');
+            destContainer.innerHTML = MY_DESTINATIONS.map(d => `
+                <div class="destination-card">
+                    <img src="${d.imageUrl}" class="dest-img" alt="${d.name}">
+                    <div class="dest-info">
+                        <h4>${d.name}</h4>
+                        <p>${d.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // הזרקת דילים וחבילות
             const dealsContainer = document.getElementById('deals-container');
             dealsContainer.innerHTML = MY_DEALS.map(deal => {
-                const bulletList = deal.bullets.map(b => `<li><i class="fa-solid fa-circle-check"></i> ${b}</li>`).join('');
+                const bulletsHtml = deal.bullets.map(b => `<li><i class="fa-solid fa-circle-check"></i> ${b}</li>`).join('');
                 return `
                     <div class="deal-card">
                         <div class="deal-img-box" style="background-image: url('${deal.imageUrl}');"></div>
@@ -283,21 +288,21 @@
                                 <span class="deal-price">${deal.price}</span>
                             </div>
                             <div class="deal-title">${deal.title}</div>
-                            <ul class="deal-list">${bulletList}</ul>
+                            <ul class="deal-list">${bulletsHtml}</ul>
                             <a href="https://api.whatsapp.com/send?phone=972528989677&text=${encodeURIComponent(deal.whatsappMessage)}" target="_blank" class="btn btn-deal">בדיקת זמינות ותאריכים</a>
                         </div>
                     </div>
                 `;
             }).join('');
 
-            // טעינת המלצות
+            // הזרקת עדויות לקוחות (Testimonials)
             const reviewsContainer = document.getElementById('reviews-container');
             reviewsContainer.innerHTML = MY_REVIEWS.map(rev => `
                 <div class="review-card">
                     <i class="fa-solid fa-quote-left"></i>
                     <p class="review-text">"${rev.text}"</p>
                     <div class="review-user">
-                        <div class="review-avatar">${rev.initials}</div>
+                        <div class="review-avatar">${rev.name.charAt(0)}</div>
                         <div>
                             <h5 style="font-size: 13px; font-weight: bold;">${rev.name}</h5>
                             <span style="font-size: 11px; color: #94a3b8;">${rev.tripType}</span>
@@ -307,8 +312,7 @@
             `).join('');
         }
 
-        // הפעלה ראשונית
-        window.onload = renderWebsiteContent;
+        window.onload = loadContent;
 
         // לוגיקת שאלון
         let summary = { הרכב: '', סגנון: '' };
