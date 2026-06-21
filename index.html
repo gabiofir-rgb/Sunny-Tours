@@ -1,921 +1,575 @@
 <!DOCTYPE html>
-<!-- ============================================================
-     SUNNY TOURS · סאני טורס · דף נחיתה לטיולי גאורגיה
-     ============================================================
-     מבנה הקובץ (לעריכה עצמאית בעורך טקסט):
-       [1] HERO            - כותרת ראשית ותמונת רקע
-       [2] AGENT-CARD      - כרטיס הסוכן האישי (גבי שמש)
-       [3] OVERVIEW        - הכירו את גאורגיה
-       [4] DESTINATIONS    - 4 אתרי חובה
-       [5] BENEFITS        - יתרונות השירות
-       [6] DEALS           - 5 דילים וחבילות
-       [7] QUIZ            - שאלון התאמה אישי (3 שלבים)
-       [8] TESTIMONIALS    - 5 המלצות מטיילים
-       [9] FAQ             - שאלות נפוצות (אקורדיון)
-       [10] FOOTER         - כותרת תחתית + כפתור וואטסאפ צף
-
-     >> כדי לעדכן טקסט/מחיר/תמונה: חפשו את תגית הקטע הרצוי
-        (לדוגמה: הסימון של DEALS מספר 6) והחליפו את הערך הסטטי.
-     >> מספר וואטסאפ מרכזי מוגדר פעם אחת ב-<script> במשתנה WA_PHONE.
-     ============================================================ -->
+<!-- ============================================================================
+     סאני טורס · אתר נחיתה לטיולי בוטיק בגאורגיה (קהל ישראלי)
+     ============================================================================
+     >> זהו קובץ אחד עצמאי. מעלים אותו לגיטהאב בשם index.html וזה עובד מיד.
+     >> כדי לערוך תוכן: פתחו את הקובץ בעורך טקסט (Notepad / VS Code), חפשו את
+        ההערה של הקטע הרצוי (לדוגמה "דיל 1"), והחליפו את הטקסט / המחיר / התמונה.
+     >> מספר וואטסאפ ומייל מוגדרים פעם אחת למטה ב-<script> (PHONE ו-EMAIL).
+     ============================================================================ -->
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>סאני טורס · טיולי בוטיק בהתאמה אישית לגאורגיה</title>
-<meta name="description" content="סאני טורס - טיולים מותאמים אישית לגאורגיה עם ליווי אישי 24/7. מלונות בוטיק נבחרים, מסלולים סודיים, ותכנון מדויק לכל מטייל.">
-
-<!-- גופנים: כותרת = Frank Ruhl Libre (סריף עברי קלאסי), גוף = Assistant -->
+<meta name="description" content="סאני טורס - טיולים מותאמים אישית לגאורגיה עם ליווי אישי 24/7. מלונות בוטיק נבחרים, מסלולים סודיים ותכנון מדויק לכל מטייל ישראלי.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Frank+Ruhl+Libre:wght@500;700;900&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   TOKENS · מערכת עיצוב
-   ============================================================ */
 :root{
-  --green-deep:#13392a;     /* ירוק יער עמוק - העוגן */
-  --green-mid:#1f5740;
-  --gold:#c9a96e;           /* זהב חם - מבטא */
-  --gold-soft:#e3d2af;
-  --cream:#f7f2e9;          /* קרם - רקע בהיר */
-  --ink:#16201b;            /* כמעט שחור */
-  --rust:#b4502e;           /* טרקוטה - מבטא משני */
-  --line:rgba(19,57,42,.12);
-  --shadow:0 12px 30px -12px rgba(19,57,42,.32);
-  --wa:#25d366;             /* ירוק וואטסאפ */
-  --radius:18px;
-  --maxw:480px;             /* רוחב מובייל מקסימלי */
-  --serif:"Frank Ruhl Libre",serif;
-  --sans:"Assistant",system-ui,sans-serif;
+  --paper:#f5f0e8;--paper-2:#fbf8f3;--ink:#241c18;--ink-soft:#5c534c;
+  --wine:#6e2433;--wine-deep:#2b1018;--wine-bright:#8a3142;
+  --brass:#a9823c;--brass-soft:#c8a874;--line:rgba(36,28,24,.12);
+  --line-on-dark:rgba(200,168,116,.26);--wa:#1faa52;--maxw:480px;
+  --disp:"Heebo",system-ui,sans-serif;--serif:"Bellefair",serif;--body:"Heebo",system-ui,sans-serif;
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{
-  font-family:var(--sans);
-  background:var(--cream);
-  color:var(--ink);
-  line-height:1.65;
-  overflow-x:hidden;           /* אין גלילה אופקית */
-  text-align:right;
-}
-img{display:block;max-width:100%}
-ul{list-style:none}
-a{text-decoration:none;color:inherit}
-button{font-family:inherit;cursor:pointer;border:none}
-
-/* מעטפת מרכזית - תוחמת הכל לרוחב מובייל וממרכזת בדסקטופ */
-.shell{max-width:var(--maxw);margin:0 auto;background:var(--cream);position:relative;
-  box-shadow:0 0 60px rgba(0,0,0,.06)}
-
-.section{padding:46px 20px}
-.eyebrow{font-family:var(--sans);font-weight:700;font-size:.78rem;letter-spacing:.18em;
-  color:var(--gold);display:flex;align-items:center;gap:9px;margin-bottom:10px}
-.eyebrow::before{content:"";width:26px;height:2px;background:var(--gold)}
-.h-title{font-family:var(--serif);font-weight:900;font-size:1.75rem;line-height:1.2;
-  color:var(--green-deep);margin-bottom:14px}
-.lead{font-size:1.02rem;color:#3a473f}
-
-/* ============================================================
-   [1] HERO
-   ============================================================ */
-.hero{position:relative;min-height:92vh;display:flex;flex-direction:column;
-  justify-content:flex-end;color:#fff;overflow:hidden;padding:34px 22px 44px}
-.hero__bg{position:absolute;inset:0;
-  background-image:
-    linear-gradient(180deg,rgba(8,24,17,.35) 0%,rgba(8,24,17,.55) 55%,rgba(8,24,17,.92) 100%),
-    url("https://images.unsplash.com/photo-1565008576549-57569a49371d?auto=format&fit=crop&w=900&q=80");
-  background-size:cover;background-position:center;z-index:0;
-  animation:slowzoom 18s ease-in-out infinite alternate}
-@keyframes slowzoom{from{transform:scale(1)}to{transform:scale(1.09)}}
-.hero__inner{position:relative;z-index:2}
-.hero__brand{position:absolute;top:0;right:0;z-index:3;
-  display:flex;align-items:center;gap:9px;font-family:var(--serif);font-weight:700;
-  font-size:1.15rem;letter-spacing:.02em}
-.hero__brand .dot{width:12px;height:12px;border-radius:50%;background:var(--gold);
-  box-shadow:0 0 0 5px rgba(201,169,110,.25)}
-.hero__kicker{display:inline-block;font-weight:700;font-size:.8rem;letter-spacing:.16em;
-  color:var(--gold-soft);border:1px solid rgba(227,210,175,.5);border-radius:40px;
-  padding:6px 15px;margin-bottom:18px}
-.hero h1{font-family:var(--serif);font-weight:900;font-size:2.7rem;line-height:1.08;
-  margin-bottom:14px;text-shadow:0 2px 20px rgba(0,0,0,.4)}
-.hero h1 em{font-style:normal;color:var(--gold)}
-.hero p.sub{font-size:1.08rem;color:#e9e6df;max-width:330px;margin-bottom:26px}
-.hero__cta{display:inline-flex;align-items:center;gap:10px;background:var(--gold);
-  color:var(--green-deep);font-weight:700;font-size:1.05rem;padding:15px 26px;
-  border-radius:50px;box-shadow:0 14px 30px -8px rgba(201,169,110,.6);
-  transition:transform .2s,box-shadow .2s}
-.hero__cta:active{transform:scale(.97)}
-.hero__cta svg{width:20px;height:20px}
-.hero__scroll{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;
-  font-size:.7rem;letter-spacing:.2em;color:rgba(255,255,255,.65);
-  display:flex;flex-direction:column;align-items:center;gap:6px;animation:bob 2s infinite}
-@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
-
-/* ============================================================
-   [2] AGENT CARD · גבי שמש
-   ============================================================ */
-.agent{padding:0 20px;margin-top:-58px;position:relative;z-index:5}
-.agent__card{background:#fff;border-radius:24px;box-shadow:var(--shadow);
-  overflow:hidden;border:1px solid var(--line)}
-.agent__photo{width:100%;height:230px;position:relative;background:
-  linear-gradient(135deg,var(--green-mid),var(--green-deep));
-  display:flex;align-items:center;justify-content:center}
+body{font-family:var(--body);background:var(--ink);color:var(--ink);line-height:1.7;font-weight:400;overflow-x:hidden;text-align:right}
+img{display:block;max-width:100%}ul{list-style:none}a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.shell{max-width:var(--maxw);margin:0 auto;background:var(--paper);position:relative}
+.wrap{padding:60px 24px}
+.eyebrow{display:flex;align-items:center;gap:11px;margin-bottom:18px;font-size:.71rem;font-weight:700;letter-spacing:.26em;color:var(--wine)}
+.eyebrow .seal{width:16px;height:16px;flex-shrink:0}
+.title{font-family:var(--disp);font-weight:800;font-size:clamp(1.95rem,7.6vw,2.35rem);line-height:1.1;color:var(--ink);letter-spacing:-.015em}
+.title em{font-style:normal;color:var(--wine)}
+.lead{color:var(--ink-soft);font-size:1.04rem;margin-top:14px;line-height:1.75}
+.sealdiv{display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 24px}
+.sealdiv::before,.sealdiv::after{content:"";height:1px;flex:1;background:var(--line)}
+.sealdiv .seal{width:30px;height:30px;flex-shrink:0}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+/* HERO */
+.hero{position:relative;min-height:95vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:30px 26px 56px;color:var(--paper)}
+.hero__bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;animation:zoom 24s ease-in-out infinite alternate}
+@keyframes zoom{from{transform:scale(1.03)}to{transform:scale(1.13)}}
+.hero__top{position:absolute;top:28px;right:26px;left:26px;z-index:3;display:flex;align-items:center;justify-content:space-between}
+.hero__brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:1.32rem;letter-spacing:.02em;color:var(--paper)}
+.hero__brand .seal{width:26px;height:26px}
+.hero__est{font-size:.62rem;letter-spacing:.24em;color:var(--brass-soft);font-weight:600}
+.hero__in{position:relative;z-index:2}
+.hero__kick{font-family:var(--serif);font-size:1.05rem;letter-spacing:.04em;color:var(--brass-soft);margin-bottom:16px;display:inline-block}
+.hero h1{font-family:var(--disp);font-weight:800;font-size:clamp(2.7rem,11.5vw,3.5rem);line-height:1.02;color:var(--paper);margin-bottom:20px;letter-spacing:-.025em}
+.hero h1 em{font-style:normal;color:var(--brass-soft);display:block}
+.hero__sub{font-size:1.09rem;color:#eee7dd;max-width:320px;margin-bottom:32px;line-height:1.65;font-weight:300}
+.hero__cta{display:inline-flex;align-items:center;gap:12px;background:var(--wine);color:var(--paper);font-weight:700;font-size:1.05rem;padding:17px 30px;border-radius:46px;box-shadow:0 18px 38px -14px rgba(110,36,51,.85);transition:transform .2s,background .2s}
+.hero__cta:active{transform:translateY(1px);background:var(--wine-bright)}
+.hero__cta i{width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-2px}
+/* AGENT */
+.agent{padding:0 22px;margin-top:-58px;position:relative;z-index:5}
+.agent__card{background:var(--paper-2);border-radius:18px;overflow:hidden;box-shadow:0 30px 60px -24px rgba(43,16,24,.55);border:1px solid var(--line)}
+.agent__photo{height:240px;position:relative;background:linear-gradient(135deg,var(--wine),var(--wine-deep));display:flex;align-items:center;justify-content:center;overflow:hidden}
 .agent__photo img{width:100%;height:100%;object-fit:cover}
-.agent__fallback{position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:10px;color:var(--gold-soft);text-align:center}
-.agent__fallback svg{width:74px;height:74px;opacity:.9}
-.agent__fallback span{font-size:.85rem;letter-spacing:.05em}
-.agent__badge{position:absolute;bottom:14px;right:14px;background:rgba(19,57,42,.85);
-  backdrop-filter:blur(4px);color:#fff;font-weight:700;font-size:.78rem;
-  padding:7px 14px;border-radius:40px;display:flex;align-items:center;gap:7px}
-.agent__badge::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--wa);
-  box-shadow:0 0 0 3px rgba(37,211,102,.3)}
-.agent__body{padding:22px 20px 24px}
-.agent__name{font-family:var(--serif);font-weight:900;font-size:1.5rem;color:var(--green-deep)}
-.agent__role{color:var(--gold);font-weight:700;font-size:.9rem;margin-bottom:12px}
-.agent__text{font-size:.97rem;color:#3a473f;margin-bottom:18px}
-.agent__contacts{display:flex;flex-direction:column;gap:10px}
-.agent__contact{display:flex;align-items:center;gap:12px;background:var(--cream);
-  border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-weight:600;
-  font-size:.95rem;transition:background .2s}
-.agent__contact:active{background:var(--gold-soft)}
-.agent__contact svg{width:20px;height:20px;color:var(--green-mid);flex-shrink:0}
+.agent__fallback{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--brass-soft);text-align:center}
+.agent__fallback svg{width:62px;height:62px;opacity:.9}
+.agent__fallback span{font-family:var(--serif);font-size:1.15rem}
+.agent__badge{position:absolute;bottom:16px;right:16px;background:rgba(43,16,24,.78);backdrop-filter:blur(5px);color:var(--paper);font-size:.74rem;font-weight:500;padding:8px 14px;border-radius:40px;display:flex;align-items:center;gap:8px}
+.agent__badge i{width:7px;height:7px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 3px rgba(31,170,82,.28)}
+.agent__body{padding:26px 24px 28px}
+.agent__name{font-family:var(--serif);font-size:2rem;color:var(--ink);line-height:1.05;letter-spacing:.01em}
+.agent__role{color:var(--wine);font-weight:600;font-size:.9rem;margin:7px 0 16px;letter-spacing:.02em}
+.agent__text{font-size:.98rem;color:var(--ink-soft);margin-bottom:22px;line-height:1.78}
+.agent__contacts{display:flex;flex-direction:column;gap:9px}
+.agent__contact{display:flex;align-items:center;gap:13px;padding:13px 15px;font-weight:500;font-size:.95rem;color:var(--ink);border:1px solid var(--line);border-radius:11px;transition:background .2s,border-color .2s}
+.agent__contact:active{background:var(--paper);border-color:var(--brass-soft)}
+.agent__contact svg{width:19px;height:19px;color:var(--wine);flex-shrink:0}
 .agent__contact span{direction:ltr;unicode-bidi:embed}
-
-/* ============================================================
-   [3] OVERVIEW
-   ============================================================ */
-.overview .h-title{margin-bottom:18px}
-.overview p{font-size:1.03rem;color:#3a473f;margin-bottom:16px}
-.overview .pull{font-family:var(--serif);font-weight:700;font-size:1.18rem;
-  color:var(--green-deep);border-right:4px solid var(--gold);padding-right:16px;margin:8px 0 20px}
-.overview__stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
-.stat{background:var(--green-deep);color:#fff;border-radius:14px;padding:16px 8px;text-align:center}
-.stat b{display:block;font-family:var(--serif);font-size:1.55rem;color:var(--gold);line-height:1}
-.stat span{font-size:.72rem;color:#cdd6cf;margin-top:6px;display:block}
-
-/* ============================================================
-   [4] DESTINATIONS · אתרי חובה
-   ============================================================ */
-.dest{background:var(--green-deep);color:#fff}
-.dest .eyebrow{color:var(--gold)}
-.dest .h-title{color:#fff}
-.dest__list{display:flex;flex-direction:column;gap:14px;margin-top:8px}
-.dcard{display:flex;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--radius);overflow:hidden;min-height:118px}
-.dcard__img{width:118px;flex-shrink:0;background-size:cover;background-position:center;position:relative}
-.dcard__num{position:absolute;top:8px;right:8px;font-family:var(--serif);font-weight:900;
-  font-size:1.1rem;color:#fff;background:rgba(19,57,42,.6);width:30px;height:30px;
-  border-radius:50%;display:flex;align-items:center;justify-content:center}
-.dcard__body{padding:14px 15px;display:flex;flex-direction:column;justify-content:center}
-.dcard__body h3{font-family:var(--serif);font-weight:700;font-size:1.18rem;color:var(--gold-soft);margin-bottom:4px}
-.dcard__body p{font-size:.85rem;color:#d6ddd7;line-height:1.5}
-
-/* ============================================================
-   [5] BENEFITS · יתרונות השירות
-   ============================================================ */
-.benefits__grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:8px}
-.bcard{display:flex;gap:15px;align-items:flex-start;background:#fff;border:1px solid var(--line);
-  border-radius:var(--radius);padding:18px 18px;box-shadow:0 6px 18px -12px rgba(19,57,42,.25)}
-.bcard__icon{width:50px;height:50px;flex-shrink:0;border-radius:14px;
-  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-  display:flex;align-items:center;justify-content:center}
-.bcard__icon svg{width:26px;height:26px;color:var(--green-deep)}
-.bcard h3{font-family:var(--serif);font-weight:700;font-size:1.12rem;color:var(--green-deep);margin-bottom:3px}
-.bcard p{font-size:.9rem;color:#54605a}
-
-/* ============================================================
-   [6] DEALS · דילים וחבילות
-   ============================================================ */
-.deals{background:#fff}
-.deals__list{display:flex;flex-direction:column;gap:22px;margin-top:8px}
-.deal{border:1px solid var(--line);border-radius:22px;overflow:hidden;
-  box-shadow:var(--shadow);background:#fff}
-.deal__head{height:170px;position:relative;background-size:cover;background-position:center;
-  display:flex;flex-direction:column;justify-content:space-between;padding:14px;color:#fff}
-.deal__head::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.7));z-index:0}
-.deal__tag{position:relative;z-index:1;align-self:flex-start;background:var(--gold);
-  color:var(--green-deep);font-weight:700;font-size:.74rem;letter-spacing:.04em;
-  padding:6px 13px;border-radius:40px}
-.deal__title{position:relative;z-index:1}
-.deal__title h3{font-family:var(--serif);font-weight:900;font-size:1.5rem;line-height:1.15;
-  text-shadow:0 2px 12px rgba(0,0,0,.5)}
-.deal__title .dur{font-size:.85rem;color:#e6e2da;font-weight:600}
-.deal__body{padding:18px 18px 20px}
-.deal__inc{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
-.deal__inc li{display:flex;align-items:flex-start;gap:10px;font-size:.92rem;color:#3a473f}
-.deal__inc li svg{width:18px;height:18px;color:var(--green-mid);flex-shrink:0;margin-top:3px}
-.deal__foot{display:flex;align-items:center;justify-content:space-between;gap:12px;
-  border-top:1px solid var(--line);padding-top:16px}
-.deal__price{display:flex;flex-direction:column;line-height:1.1}
-.deal__price small{font-size:.72rem;color:#7a857e}
-.deal__price b{font-family:var(--serif);font-size:1.55rem;color:var(--green-deep)}
-.deal__price b span{font-size:.85rem;color:#7a857e;font-weight:600}
-.btn-wa{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff;
-  font-weight:700;font-size:.92rem;padding:12px 18px;border-radius:46px;
-  box-shadow:0 10px 22px -10px rgba(37,211,102,.7);transition:transform .15s}
-.btn-wa:active{transform:scale(.96)}
-.btn-wa svg{width:18px;height:18px}
-
-/* ============================================================
-   [7] QUIZ · שאלון התאמה
-   ============================================================ */
-.quiz{background:var(--green-deep);color:#fff}
-.quiz .eyebrow{color:var(--gold)}
-.quiz .h-title{color:#fff}
-.quiz .lead{color:#cdd6cf;margin-bottom:22px}
-.quiz__card{background:#fff;border-radius:22px;padding:22px 20px;color:var(--ink);box-shadow:var(--shadow)}
-.quiz__progress{display:flex;gap:6px;margin-bottom:20px}
-.quiz__progress .pdot{flex:1;height:5px;border-radius:5px;background:var(--line);transition:background .3s}
-.quiz__progress .pdot.on{background:var(--gold)}
-.quiz__step{display:none;animation:fade .35s ease}
-.quiz__step.active{display:block}
+/* OVERVIEW */
+.ov p{font-size:1.05rem;color:var(--ink-soft);margin-bottom:18px;line-height:1.85}
+.ov p strong{color:var(--ink);font-weight:600}
+.ov__pull{font-family:var(--serif);font-size:1.55rem;line-height:1.35;color:var(--wine);padding:8px 0 8px 18px;border-right:3px solid var(--brass);margin:10px 0 24px}
+.ledger{display:flex;margin-top:30px;border-top:1px solid var(--line);padding-top:24px}
+.ledger__item{flex:1;text-align:center;padding:0 6px}
+.ledger__item b{font-family:var(--serif);font-size:2rem;color:var(--wine);display:block;line-height:1}
+.ledger__item span{font-size:.72rem;color:var(--ink-soft);margin-top:9px;display:block;letter-spacing:.04em}
+.ledger__sep{width:1px;background:var(--line);margin:2px 0}
+/* DESTINATIONS */
+.dest{background:var(--wine-deep);color:var(--paper)}
+.dest .eyebrow{color:var(--brass-soft)}.dest .title{color:var(--paper)}.dest .title em{color:var(--brass-soft)}
+.dest__list{display:flex;flex-direction:column}
+.dcard{display:flex;gap:16px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line-on-dark)}
+.dcard:first-child{border-top:1px solid var(--line-on-dark)}
+.dcard__img{width:100px;height:100px;flex-shrink:0;background-size:cover;background-position:center;background-color:var(--wine);border-radius:12px;position:relative}
+.dcard__img::after{content:"";position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 1px var(--line-on-dark)}
+.dcard__body{flex:1}
+.dcard__body h3{font-family:var(--disp);font-weight:700;font-size:1.22rem;color:var(--paper);line-height:1.15;margin-bottom:5px}
+.dcard__body p{font-size:.88rem;color:#cdbfb6;line-height:1.55}
+/* BENEFITS */
+.ben__list{display:flex;flex-direction:column;gap:20px}
+.bcard{display:flex;gap:17px;align-items:flex-start}
+.bcard__ic{width:50px;height:50px;flex-shrink:0;border-radius:50%;border:1px solid var(--brass);display:flex;align-items:center;justify-content:center;background:var(--paper-2)}
+.bcard__ic svg{width:23px;height:23px;color:var(--wine)}
+.bcard h3{font-family:var(--disp);font-weight:700;font-size:1.16rem;color:var(--ink);margin-bottom:3px;line-height:1.2}
+.bcard p{font-size:.93rem;color:var(--ink-soft);line-height:1.65}
+/* DEALS */
+.deals__list{display:flex;flex-direction:column;gap:24px}
+.deal{background:var(--paper-2);border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 16px 36px -22px rgba(43,16,24,.4)}
+.deal__head{height:178px;position:relative;background-size:cover;background-position:center;display:flex;flex-direction:column;justify-content:space-between;padding:16px;background-color:var(--wine)}
+.deal__head::after{content:"";position:absolute;inset:0;background:linear-gradient(178deg,rgba(43,16,24,.15),rgba(43,16,24,.8));z-index:0}
+.deal__tag{position:relative;z-index:1;align-self:flex-start;background:var(--brass);color:#fff;font-weight:600;font-size:.72rem;letter-spacing:.04em;padding:6px 14px;border-radius:30px}
+.deal__name{position:relative;z-index:1}
+.deal__name h3{font-family:var(--disp);font-weight:800;font-size:1.5rem;color:var(--paper);line-height:1.12;letter-spacing:-.01em;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.deal__name .dur{font-size:.84rem;color:#eaded3;font-weight:300}
+.deal__body{padding:20px 20px 22px}
+.deal__inc{display:flex;flex-direction:column;gap:11px;margin-bottom:22px}
+.deal__inc li{display:flex;align-items:flex-start;gap:11px;font-size:.93rem;color:var(--ink-soft)}
+.deal__inc li svg{width:16px;height:16px;color:var(--brass);flex-shrink:0;margin-top:4px}
+.deal__foot{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:18px}
+.deal__price{line-height:1.05}
+.deal__price small{font-size:.72rem;color:var(--ink-soft);display:block;margin-bottom:3px}
+.deal__price b{font-family:var(--serif);font-size:1.85rem;color:var(--wine)}
+.deal__price b span{font-size:.82rem;color:var(--ink-soft)}
+.wa-btn{display:inline-flex;align-items:center;gap:8px;background:var(--wine);color:var(--paper);font-weight:600;font-size:.92rem;padding:13px 19px;border-radius:40px;transition:background .2s}
+.wa-btn:active{background:var(--wine-bright)}
+.wa-btn svg{width:17px;height:17px;color:var(--brass-soft)}
+/* QUIZ */
+.quiz{background:var(--wine-deep);color:var(--paper)}
+.quiz .eyebrow{color:var(--brass-soft)}.quiz .title{color:var(--paper)}.quiz .title em{color:var(--brass-soft)}.quiz .lead{color:#cdbfb6}
+.quiz__card{background:var(--paper-2);color:var(--ink);border-radius:18px;padding:26px 22px;box-shadow:0 24px 50px -22px rgba(0,0,0,.6)}
+.quiz__prog{display:flex;gap:8px;margin-bottom:24px}
+.quiz__prog .pd{flex:1;height:4px;border-radius:4px;background:var(--line);transition:background .3s}
+.quiz__prog .pd.on{background:var(--brass)}
+.quiz__step{display:none;animation:fade .4s ease}.quiz__step.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.quiz__q{font-family:var(--serif);font-weight:700;font-size:1.25rem;color:var(--green-deep);margin-bottom:4px}
-.quiz__hint{font-size:.85rem;color:#7a857e;margin-bottom:16px}
-.quiz__opts{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
-.opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:14px;
-  padding:13px 15px;font-weight:600;font-size:.97rem;transition:all .18s;background:#fff}
-.opt:active{transform:scale(.99)}
-.opt.sel{border-color:var(--green-mid);background:#f0f6f1}
-.opt .check{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center}
-.opt.sel .check{background:var(--green-mid);border-color:var(--green-mid)}
-.opt.sel .check::after{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
-.opt .emo{font-size:1.25rem}
-.quiz__field{margin-bottom:14px}
-.quiz__field label{display:block;font-weight:600;font-size:.9rem;margin-bottom:6px;color:var(--green-deep)}
-.quiz__field input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;
-  font-family:inherit;font-size:1rem;background:#fff;color:var(--ink)}
-.quiz__field input:focus{outline:none;border-color:var(--green-mid)}
-.quiz__field input[dir]{text-align:right}
-.quiz__nav{display:flex;gap:10px;margin-top:6px}
-.quiz__nav button{flex:1;padding:13px;border-radius:46px;font-weight:700;font-size:1rem}
-.btn-next{background:var(--green-deep);color:#fff}
-.btn-next:disabled{background:#c8d0ca;color:#fff}
-.btn-back{background:transparent;color:var(--green-deep);border:1.5px solid var(--line)!important;flex:0 0 42%}
-.btn-submit{background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn-submit svg{width:18px;height:18px}
-
-/* ============================================================
-   [8] TESTIMONIALS · המלצות
-   ============================================================ */
-.tcard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-  padding:20px 18px;box-shadow:0 6px 18px -12px rgba(19,57,42,.25);margin-bottom:14px;position:relative}
-.tcard::before{content:"\201D";position:absolute;top:6px;left:16px;font-family:var(--serif);
-  font-size:3.6rem;color:var(--gold-soft);line-height:1}
-.tcard blockquote{font-size:.97rem;color:#3a473f;margin-bottom:16px;position:relative;z-index:1}
-.tcard__person{display:flex;align-items:center;gap:12px}
-.tavatar{width:46px;height:46px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;
-  justify-content:center;font-family:var(--serif);font-weight:900;font-size:1.05rem;color:#fff}
-.tcard__person b{display:block;font-weight:700;color:var(--green-deep);font-size:.97rem}
-.tcard__person span{font-size:.8rem;color:#7a857e}
-.tstars{color:var(--gold);font-size:.85rem;letter-spacing:2px;margin-bottom:8px}
-
-/* ============================================================
-   [9] FAQ · אקורדיון
-   ============================================================ */
-.faq__list{margin-top:8px;display:flex;flex-direction:column;gap:10px}
-.faq__item{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
-.faq__q{width:100%;text-align:right;background:#fff;padding:16px 18px;font-weight:700;
-  font-size:1rem;color:var(--green-deep);display:flex;align-items:center;justify-content:space-between;gap:12px}
-.faq__q .ico{width:26px;height:26px;flex-shrink:0;border-radius:50%;background:var(--cream);
-  display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--gold);
-  transition:transform .25s;font-weight:400}
-.faq__item.open .faq__q .ico{transform:rotate(45deg)}
-.faq__a{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.faq__a p{padding:0 18px 18px;font-size:.93rem;color:#54605a}
-
-/* ============================================================
-   [10] FOOTER + FLOATING WA
-   ============================================================ */
-.footer{background:var(--ink);color:#cdd6cf;padding:38px 20px 30px;text-align:center}
-.footer__brand{font-family:var(--serif);font-weight:900;font-size:1.6rem;color:#fff;
-  display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px}
-.footer__brand .dot{width:11px;height:11px;border-radius:50%;background:var(--gold)}
-.footer__tag{color:var(--gold-soft);font-size:.9rem;margin-bottom:22px}
-.footer__cred{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
-.footer__cred a{display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  font-weight:600;font-size:.95rem;color:#e9e6df}
+.quiz__q{font-family:var(--disp);font-weight:800;font-size:1.32rem;color:var(--ink);margin-bottom:4px;line-height:1.2}
+.quiz__hint{font-size:.84rem;color:var(--ink-soft);margin-bottom:18px}
+.quiz__opts{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.opt{display:flex;align-items:center;gap:13px;border:1px solid var(--line);border-radius:12px;padding:14px 15px;font-weight:500;font-size:.96rem;color:var(--ink);transition:all .18s;text-align:right;background:#fff}
+.opt:active{transform:scale(.995)}
+.opt.sel{border-color:var(--wine);background:rgba(110,36,51,.05)}
+.opt .ck{width:21px;height:21px;border-radius:50%;border:1.5px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .18s}
+.opt.sel .ck{background:var(--wine);border-color:var(--wine)}
+.opt.sel .ck::after{content:"";width:7px;height:7px;border-radius:50%;background:#fff}
+.opt .emo{font-size:1.2rem}.opt span.lbl{flex:1}
+.qf{margin-bottom:15px}
+.qf label{display:block;font-weight:600;font-size:.88rem;margin-bottom:7px;color:var(--ink)}
+.qf input{width:100%;border:1px solid var(--line);border-radius:11px;padding:13px 14px;font-family:inherit;font-size:1rem;background:#fff;color:var(--ink);text-align:right}
+.qf input:focus{outline:none;border-color:var(--wine)}
+.qnav{display:flex;gap:10px;margin-top:8px}
+.qnav button{flex:1;padding:14px;border-radius:40px;font-weight:700;font-size:.98rem;transition:opacity .2s}
+.qn{background:var(--ink);color:var(--paper)}.qn:disabled{background:#cfc6bd;color:#fff;cursor:default}
+.qb{background:transparent;color:var(--ink);border:1px solid var(--line)!important;flex:0 0 40%}
+.qsub{background:var(--wine);color:var(--paper);display:flex;align-items:center;justify-content:center;gap:9px}
+.qsub svg{width:17px;height:17px}
+/* TESTIMONIALS */
+.tcard{background:var(--paper-2);border-radius:16px;border:1px solid var(--line);padding:24px 22px 22px;margin-bottom:16px;box-shadow:0 10px 26px -20px rgba(43,16,24,.35)}
+.tcard__mark{font-family:var(--serif);color:var(--brass);font-size:2.6rem;line-height:.4;height:20px;display:block}
+.tstars{color:var(--brass);font-size:.82rem;letter-spacing:3px;margin:10px 0 6px}
+.tcard blockquote{font-size:.98rem;color:var(--ink-soft);margin-bottom:18px;line-height:1.72}
+.tcard__p{display:flex;align-items:center;gap:13px}
+.tav{width:46px;height:46px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;color:var(--paper)}
+.tcard__p b{display:block;font-family:var(--serif);font-weight:400;color:var(--ink);font-size:1.1rem;letter-spacing:.01em}
+.tcard__p small{font-size:.8rem;color:var(--ink-soft)}
+/* FAQ */
+.faq__list{display:flex;flex-direction:column}
+.faq__item{border-top:1px solid var(--line)}.faq__item:last-child{border-bottom:1px solid var(--line)}
+.faq__q{width:100%;text-align:right;padding:20px 2px;font-weight:600;font-size:1.02rem;color:var(--ink);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.faq__q i{width:13px;height:13px;flex-shrink:0;position:relative}
+.faq__q i::before,.faq__q i::after{content:"";position:absolute;background:var(--wine);transition:transform .3s}
+.faq__q i::before{top:6px;left:0;width:13px;height:1.5px}.faq__q i::after{top:0;left:6px;width:1.5px;height:13px}
+.faq__item.open .faq__q i::after{transform:scaleY(0)}
+.faq__a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq__a p{padding:0 2px 20px;font-size:.94rem;color:var(--ink-soft);line-height:1.72}
+/* FOOTER */
+.footer{background:var(--wine-deep);padding:46px 24px 34px;text-align:center;color:var(--paper)}
+.footer .seal{width:34px;height:34px;margin:0 auto 14px}
+.footer__brand{font-family:var(--serif);font-size:1.7rem;color:var(--paper);margin-bottom:6px}
+.footer__tag{color:var(--brass-soft);font-size:.9rem;margin-bottom:28px}
+.footer__cred{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.footer__cred a{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:400;font-size:.95rem;color:#eee7dd}
 .footer__cred a span{direction:ltr;unicode-bidi:embed}
-.footer__cred svg{width:18px;height:18px;color:var(--gold)}
-.footer__copy{font-size:.78rem;color:#6f7a73;border-top:1px solid rgba(255,255,255,.08);padding-top:18px}
-
-.wa-float{position:fixed;bottom:20px;left:20px;z-index:90;width:58px;height:58px;border-radius:50%;
-  background:var(--wa);box-shadow:0 12px 26px -6px rgba(37,211,102,.7);
-  display:flex;align-items:center;justify-content:center;animation:pulse 2.4s infinite}
-.wa-float svg{width:32px;height:32px;color:#fff}
-@keyframes pulse{0%{box-shadow:0 12px 26px -6px rgba(37,211,102,.7),0 0 0 0 rgba(37,211,102,.5)}
-  70%{box-shadow:0 12px 26px -6px rgba(37,211,102,.7),0 0 0 16px rgba(37,211,102,0)}
-  100%{box-shadow:0 12px 26px -6px rgba(37,211,102,.7),0 0 0 0 rgba(37,211,102,0)}}
-
-/* נגישות: כיבוד reduced-motion */
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;scroll-behavior:auto!important}
-}
-:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.footer__cred svg{width:17px;height:17px;color:var(--brass-soft)}
+.footer__copy{font-size:.76rem;color:#9a8278;border-top:1px solid var(--line-on-dark);padding-top:20px}
+.wa-float{position:fixed;bottom:22px;left:22px;z-index:90;width:56px;height:56px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px -8px rgba(0,0,0,.55),0 0 0 2px rgba(169,130,60,.5)}
+.wa-float svg{width:30px;height:30px;color:#fff}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
 </style>
 </head>
 <body>
 <div class="shell">
 
-<!-- ============================================================ -->
-<!-- [1] HERO · כותרת ראשית                                       -->
-<!-- ערוך כאן: כותרת, תת-כותרת, ותמונת רקע (ב-CSS: .hero__bg)      -->
-<!-- ============================================================ -->
-<header class="hero">
-  <div class="hero__bg"></div>
-  <div class="hero__brand"><span class="dot"></span>סאני טורס</div>
-  <div class="hero__inner">
-    <span class="hero__kicker">טיולי בוטיק בהתאמה אישית</span>
-    <h1>גאורגיה<br><em>שעוד לא הכרתם</em></h1>
-    <p class="sub">חופשה שנתפרת בדיוק עליכם, עם ליווי אישי וצמוד 24/7 לאורך כל הדרך. בלי תבניות, בלי הפתעות.</p>
-    <a href="#quiz" class="hero__cta">
-      בנו לי טיול מושלם
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    </a>
-  </div>
-  <div class="hero__scroll">גללו למטה<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></div>
-</header>
-
-<!-- ============================================================ -->
-<!-- [2] AGENT CARD · גבי שמש                                     -->
-<!-- תמונה: קובץ מקומי gabi.jpg (עם fallback אם חסר)              -->
-<!-- ערוך כאן: שם, טקסט אישי, טלפון, אימייל                       -->
-<!-- ============================================================ -->
-<section class="agent" aria-label="הסוכן האישי">
-  <div class="agent__card">
-    <div class="agent__photo">
-      <!-- אם gabi.jpg קיים יוצג; אחרת onerror יסתיר וייחשף ה-fallback -->
-      <img src="gabi.jpg" alt="גבי שמש, סוכן הנסיעות שלכם" onerror="this.style.display='none'">
-      <div class="agent__fallback" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/></svg>
-        <span>גבי שמש</span>
+  <!-- ===================== [1] הירו ===================== -->
+  <!-- ערוך כאן: כותרת, תת-כותרת, ותמונת רקע (השדה background-image למטה) -->
+  <header class="hero">
+    <div class="hero__bg" style="background-image:linear-gradient(178deg,rgba(43,16,24,.32),rgba(43,16,24,.5) 48%,rgba(28,12,16,.96)),url('https://images.unsplash.com/photo-1565008576549-57569a49371d?auto=format&fit=crop&w=900&q=80')"></div>
+    <div class="hero__top">
+      <div class="hero__brand">
+        <svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#c8a874" stroke-width="1"/><circle cx="16" cy="16" r="9" stroke="#c8a874" stroke-width=".7" opacity=".6"/><circle cx="16" cy="16" r="2.4" fill="#c8a874"/></svg>
+        סאני טורס
       </div>
-      <div class="agent__badge">זמין עכשיו בוואטסאפ</div>
+      <span class="hero__est">בוטיק · גאורגיה</span>
     </div>
-    <div class="agent__body">
-      <div class="agent__name">גבי שמש</div>
-      <div class="agent__role">סוכן הנסיעות האישי שלכם · מומחה קווקז</div>
-      <p class="agent__text">
-        נעים מאוד, אני גבי. שנים שאני חי ונושם את גאורגיה, מכיר כל פנייה בהרי הקווקז וכל יקב נסתר בעמקים.
-        אני בוחר עבורכם אישית את מלונות הבוטיק, תופר את המסלול לפי האופי והקצב שלכם,
-        ונשאר זמין בוואטסאפ מהרגע הראשון ועד שאתם חוזרים הביתה. לא סוכנות, אדם אחד שאחראי על כל פרט.
-      </p>
-      <div class="agent__contacts">
-        <!-- WHATSAPP -->
-        <a class="agent__contact" href="https://wa.me/972528989677" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.5 14.2c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.6-1-2.3-1-3.8-3.4-3.9-3.6-.1-.2-1-1.3-1-2.5s.6-1.7.8-2c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2 1.3 2.3 1.5.2.1.4 0 .5-.1l.7-.8c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.8-.1 1.5z"/></svg>
-          <span>+972 52-898-9677</span>
-        </a>
-        <!-- PHONE -->
-        <a class="agent__contact" href="tel:+972528989677">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
-          <span>+972 52-898-9677</span>
-        </a>
-        <!-- EMAIL -->
-        <a class="agent__contact" href="mailto:ss@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
-          <span>ss@gmail.com</span>
-        </a>
-      </div>
+    <div class="hero__in">
+      <span class="hero__kick">טיולי בוטיק בהתאמה אישית</span>
+      <h1>גאורגיה<em>שעוד לא הכרתם</em></h1>
+      <p class="hero__sub">חופשה שנתפרת בדיוק עליכם, עם ליווי אישי וצמוד 24/7 לאורך כל הדרך. בלי תבניות, בלי הפתעות.</p>
+      <a href="#quiz" class="hero__cta"><span>בנו לי טיול מושלם</span><i></i></a>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ============================================================ -->
-<!-- [3] OVERVIEW · הכירו את גאורגיה                              -->
-<!-- ============================================================ -->
-<section class="section overview">
-  <div class="eyebrow">המקום</div>
-  <h2 class="h-title">הכירו את גאורגיה</h2>
-  <p>במפגש בין אירופה לאסיה שוכנת ארץ קטנה שגדולה בכל קנה מידה. <strong>הרי הקווקז</strong> המושלגים מתנשאים מעל עמקים ירוקים ופורחים, ולמרגלותיהם פזורים כפרים שבהם הזמן עוצר מלכת.</p>
-  <p class="pull">8,000 שנה של יין רצוף, הרבה לפני שהמילה "וינטג'" נולדה.</p>
-  <p>גאורגיה היא ערש היין העולמי, עם שיטת ה<strong>קְוֶוורי</strong> העתיקה שבה היין מבשיל בכדי חרס קבורים באדמה. ובין כוסית לכוסית מחכה אחת המטבחים הטעימים והנדיבים בעולם: <strong>חצ'אפורי</strong> אפוי וזולג גבינה, ו<strong>חינקלי</strong> ממולא ומהביל. זו ארץ של הכנסת אורחים, נופים שעוצרים נשימה וטעמים שנשארים איתכם הרבה אחרי שחזרתם.</p>
-  <div class="overview__stats">
-    <div class="stat"><b>8,000</b><span>שנות יין</span></div>
-    <div class="stat"><b>5,000+</b><span>מטר פסגות</span></div>
-    <div class="stat"><b>24/7</b><span>ליווי אישי</span></div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- [4] DESTINATIONS · 4 אתרי חובה                              -->
-<!-- כל כרטיס: תמונת Unsplash + כותרת + תיאור                     -->
-<!-- ============================================================ -->
-<section class="section dest">
-  <div class="eyebrow">אתרי חובה</div>
-  <h2 class="h-title">4 יעדים שאי אפשר לפספס</h2>
-  <div class="dest__list">
-
-    <!-- DEST 1: טביליסי -->
-    <article class="dcard">
-      <div class="dcard__img" style="background-image:url('https://images.unsplash.com/photo-1565008576549-57569a49371d?auto=format&fit=crop&w=400&q=80')">
-        <span class="dcard__num">1</span>
+  <!-- ===================== [2] כרטיס הסוכן ===================== -->
+  <!-- תמונה: קובץ gabi.jpg לצד index.html. אם חסר, מוצג אייקון במקום. -->
+  <section class="agent">
+    <div class="agent__card">
+      <div class="agent__photo">
+        <img src="gabi.jpg" alt="גבי שמש" onerror="this.style.display='none'">
+        <div class="agent__fallback" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/></svg>
+          <span>גבי שמש</span>
+        </div>
+        <div class="agent__badge"><i></i>זמין עכשיו בוואטסאפ</div>
       </div>
-      <div class="dcard__body">
-        <h3>טביליסי העתיקה</h3>
-        <p>סמטאות אבן, מרחצאות גופרית ומרפסות עץ מגולפות. עלו ברכבל לתצפית הפנורמית על הבירה הקסומה לאור שקיעה.</p>
-      </div>
-    </article>
-
-    <!-- DEST 2: גודאורי -->
-    <article class="dcard">
-      <div class="dcard__img" style="background-image:url('https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=400&q=80')">
-        <span class="dcard__num">2</span>
-      </div>
-      <div class="dcard__body">
-        <h3>גודאורי</h3>
-        <p>אתר הסקי האלפיני המוביל, אופק של פסגות מושלגות, מצנחי רחיפה מעל העננים ואנדרטת הידידות הצבעונית.</p>
-      </div>
-    </article>
-
-    <!-- DEST 3: קזבגי -->
-    <article class="dcard">
-      <div class="dcard__img" style="background-image:url('https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&w=400&q=80')">
-        <span class="dcard__num">3</span>
-      </div>
-      <div class="dcard__body">
-        <h3>קזבגי</h3>
-        <p>מסלולי ג'יפ 4x4 אל מרגלות ההר, וכנסיית גרגטי המבודדת שמרחפת בין העננים בגובה 2,170 מטר.</p>
-      </div>
-    </article>
-
-    <!-- DEST 4: קאחטי -->
-    <article class="dcard">
-      <div class="dcard__img" style="background-image:url('https://images.unsplash.com/photo-1474722883778-792e7990302f?auto=format&fit=crop&w=400&q=80')">
-        <span class="dcard__num">4</span>
-      </div>
-      <div class="dcard__body">
-        <h3>חבל היין קאחטי</h3>
-        <p>לב היין של גאורגיה: יקבים מסורתיים, סדנאות בישול אותנטיות וטעימות ישר מתוך כדי הקווורי העתיקים.</p>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- [5] BENEFITS · יתרונות השירות                               -->
-<!-- ============================================================ -->
-<section class="section benefits">
-  <div class="eyebrow">למה איתי</div>
-  <h2 class="h-title">השירות שמרגישים בכל רגע</h2>
-  <div class="benefits__grid">
-
-    <div class="bcard">
-      <div class="bcard__icon">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>
-      </div>
-      <div><h3>ליווי 24/7 בוואטסאפ</h3><p>אני זמין עבורכם לכל שאלה, שינוי או בקשה לאורך כל הטיול, בזמן אמת.</p></div>
-    </div>
-
-    <div class="bcard">
-      <div class="bcard__icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 2.4 7.4H22l-6 4.5L18.4 21 12 16.5 5.6 21 8 13.9 2 9.4h7.6z"/></svg>
-      </div>
-      <div><h3>מלונות בוטיק נבחרים</h3><p>כל מלון נבדק על ידי אישית. רק מקומות עם נשמה, מיקום מנצח ושירות שלא מאכזב.</p></div>
-    </div>
-
-    <div class="bcard">
-      <div class="bcard__icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5-2V4l5 2 6-2 5 2v14l-5-2-6 2z"/><path d="M9 6v14M15 4v14"/></svg>
-      </div>
-      <div><h3>מסלולים מקומיים סודיים</h3><p>פינות אותנטיות שלא תמצאו במדריכים. המקומות שרק מי שחי שם באמת מכיר.</p></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- [6] DEALS · 5 דילים וחבילות                                 -->
-<!-- כל דיל: תמונה, תגית, כותרת, מחיר, רשימת כלול, כפתור וואטסאפ  -->
-<!-- *** המחירים הם הדמיה לדוגמה - ערכו לפי הצורך ***             -->
-<!-- ============================================================ -->
-<section class="section deals">
-  <div class="eyebrow">חבילות נבחרות</div>
-  <h2 class="h-title">דילים שנבנו באהבה</h2>
-  <p class="lead">5 חבילות לדוגמה, וכולן ניתנות להתאמה אישית מלאה. בחרו את הקרובה לליבכם ונצא לדרך.</p>
-  <div class="deals__list">
-
-    <!-- DEAL 1: סוף שבוע קולינרי -->
-    <article class="deal">
-      <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=700&q=80')">
-        <span class="deal__tag">קולינריה · עירוני</span>
-        <div class="deal__title"><h3>סוף שבוע קולינרי בטביליסי</h3><span class="dur">4 ימים / 3 לילות</span></div>
-      </div>
-      <div class="deal__body">
-        <ul class="deal__inc">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודה</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>מלון בוטיק במרכז העיר העתיקה</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>סדנת בישול חצ'אפורי + סיור שווקים</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>טרנספרים פרטיים משדה התעופה</li>
-        </ul>
-        <div class="deal__foot">
-          <div class="deal__price"><small>החל מ־</small><b>590<span>$ לאדם</span></b></div>
-          <a class="btn-wa" data-deal="סוף שבוע קולינרי בטביליסי" href="#">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים
-          </a>
+      <div class="agent__body">
+        <div class="agent__name">גבי שמש</div>
+        <div class="agent__role">סוכן הנסיעות האישי שלכם · מומחה קווקז</div>
+        <p class="agent__text">נעים מאוד, אני גבי. שנים שאני חי ונושם את גאורגיה, מכיר כל פנייה בהרי הקווקז וכל יקב נסתר בעמקים. אני בוחר עבורכם אישית את מלונות הבוטיק, תופר את המסלול לפי האופי והקצב שלכם, ונשאר זמין בוואטסאפ מהרגע הראשון ועד שאתם חוזרים הביתה. לא סוכנות, אדם אחד שאחראי על כל פרט.</p>
+        <div class="agent__contacts">
+          <a class="agent__contact" data-wa="היי גבי, אשמח לשמוע עוד על טיולי גאורגיה"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.5 14.2c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.6-1-2.3-1-3.8-3.4-3.9-3.6-.1-.2-1-1.3-1-2.5s.6-1.7.8-2c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2 1.3 2.3 1.5.2.1.4 0 .5-.1l.7-.8c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.8-.1 1.5z"/></svg><span class="js-phone"></span></a>
+          <a class="agent__contact js-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg><span class="js-phone"></span></a>
+          <a class="agent__contact js-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span class="js-email"></span></a>
         </div>
       </div>
-    </article>
+    </div>
+  </section>
 
-    <!-- DEAL 2: ג'יפים בקזבגי -->
-    <article class="deal">
-      <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&w=700&q=80')">
-        <span class="deal__tag">הרפתקה · 4x4</span>
-        <div class="deal__title"><h3>הרפתקת ג'יפים בקזבגי</h3><span class="dur">5 ימים / 4 לילות</span></div>
+  <div class="sealdiv"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#a9823c" stroke-width="1"/><circle cx="16" cy="16" r="9" stroke="#a9823c" stroke-width=".7" opacity=".5"/><circle cx="16" cy="16" r="2.4" fill="#6e2433"/></svg></div>
+
+  <!-- ===================== [3] סקירת גאורגיה ===================== -->
+  <section class="wrap ov reveal">
+    <div class="eyebrow"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#6e2433" stroke-width="1.4"/><circle cx="16" cy="16" r="3" fill="#6e2433"/></svg>המקום</div>
+    <h2 class="title">הכירו את גאורגיה</h2>
+    <div style="height:20px"></div>
+    <p>במפגש בין אירופה לאסיה שוכנת ארץ קטנה שגדולה בכל קנה מידה. <strong>הרי הקווקז</strong> המושלגים מתנשאים מעל עמקים ירוקים ופורחים, ולמרגלותיהם פזורים כפרים שבהם הזמן עוצר מלכת.</p>
+    <p class="ov__pull">8,000 שנה של יין רצוף, הרבה לפני שהמילה "וינטג'" נולדה.</p>
+    <p>גאורגיה היא ערש היין העולמי, עם שיטת הקְוֶוורי העתיקה שבה היין מבשיל בכדי חרס קבורים באדמה. ובין כוסית לכוסית מחכה אחד המטבחים הטעימים והנדיבים בעולם: <strong>חצ'אפורי</strong> אפוי וזולג גבינה, ו<strong>חינקלי</strong> ממולא ומהביל. זו ארץ של הכנסת אורחים, נופים שעוצרים נשימה וטעמים שנשארים איתכם הרבה אחרי שחזרתם.</p>
+    <div class="ledger">
+      <div class="ledger__item"><b>8,000</b><span>שנות יין</span></div>
+      <div class="ledger__sep"></div>
+      <div class="ledger__item"><b>5,000+</b><span>מטר פסגות</span></div>
+      <div class="ledger__sep"></div>
+      <div class="ledger__item"><b>24/7</b><span>ליווי אישי</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== [4] יעדי חובה (5) ===================== -->
+  <!-- כל יעד: תמונה (background-image), כותרת, תיאור -->
+  <section class="wrap dest reveal">
+    <div class="eyebrow"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#c8a874" stroke-width="1.4"/><circle cx="16" cy="16" r="3" fill="#c8a874"/></svg>אתרי חובה</div>
+    <h2 class="title">יעדים שאי אפשר <em>לפספס</em></h2>
+    <div style="height:24px"></div>
+    <div class="dest__list">
+      <article class="dcard"><div class="dcard__img" style="background-image:url('https://images.unsplash.com/photo-1565008576549-57569a49371d?auto=format&fit=crop&w=400&q=80')"></div><div class="dcard__body"><h3>טביליסי העתיקה</h3><p>סמטאות אבן, מרחצאות גופרית ומרפסות עץ מגולפות. עלו ברכבל לתצפית הפנורמית על הבירה הקסומה לאור שקיעה.</p></div></article>
+      <article class="dcard"><div class="dcard__img" style="background-image:url('https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=400&q=80')"></div><div class="dcard__body"><h3>גודאורי</h3><p>אתר הסקי האלפיני המוביל, אופק של פסגות מושלגות, מצנחי רחיפה מעל העננים ואנדרטת הידידות הצבעונית.</p></div></article>
+      <article class="dcard"><div class="dcard__img" style="background-image:url('https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&w=400&q=80')"></div><div class="dcard__body"><h3>קזבגי</h3><p>מסלולי ג'יפ 4x4 אל מרגלות ההר, וכנסיית גרגטי המבודדת שמרחפת בין העננים בגובה 2,170 מטר.</p></div></article>
+      <article class="dcard"><div class="dcard__img" style="background-image:url('https://images.unsplash.com/photo-1474722883778-792e7990302f?auto=format&fit=crop&w=400&q=80')"></div><div class="dcard__body"><h3>חבל היין קאחטי</h3><p>לב היין של גאורגיה: יקבים מסורתיים, סדנאות בישול אותנטיות וטעימות ישר מתוך כדי הקווורי העתיקים.</p></div></article>
+      <article class="dcard"><div class="dcard__img" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80')"></div><div class="dcard__body"><h3>בטומי</h3><p>פנינת הים השחור: טיילת מודרנית, גורדי שחק נוצצים, גנים בוטניים ואווירת ריביירה גאורגית שוקקת חיים יום ולילה.</p></div></article>
+    </div>
+  </section>
+
+  <!-- ===================== [5] יתרונות השירות (3) ===================== -->
+  <section class="wrap reveal">
+    <div class="eyebrow"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#6e2433" stroke-width="1.4"/><circle cx="16" cy="16" r="3" fill="#6e2433"/></svg>למה איתי</div>
+    <h2 class="title">השירות שמרגישים <em>בכל רגע</em></h2>
+    <div style="height:28px"></div>
+    <div class="ben__list">
+      <div class="bcard"><div class="bcard__ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg></div><div><h3>ליווי 24/7 בוואטסאפ</h3><p>אני זמין עבורכם לכל שאלה, שינוי או בקשה לאורך כל הטיול, בזמן אמת.</p></div></div>
+      <div class="bcard"><div class="bcard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 2 2.4 7.4H22l-6 4.5L18.4 21 12 16.5 5.6 21 8 13.9 2 9.4h7.6z"/></svg></div><div><h3>מלונות בוטיק נבחרים</h3><p>כל מלון נבדק על ידי אישית. רק מקומות עם נשמה, מיקום מנצח ושירות שלא מאכזב.</p></div></div>
+      <div class="bcard"><div class="bcard__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 20l-5-2V4l5 2 6-2 5 2v14l-5-2-6 2z"/><path d="M9 6v14M15 4v14"/></svg></div><div><h3>מסלולים מקומיים סודיים</h3><p>פינות אותנטיות שלא תמצאו במדריכים. המקומות שרק מי שחי שם באמת מכיר.</p></div></div>
+    </div>
+  </section>
+
+  <div class="sealdiv"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#a9823c" stroke-width="1"/><circle cx="16" cy="16" r="9" stroke="#a9823c" stroke-width=".7" opacity=".5"/><circle cx="16" cy="16" r="2.4" fill="#6e2433"/></svg></div>
+
+  <!-- ===================== [6] דילים וחבילות (6) ===================== -->
+  <!-- כל דיל: תווית, כותרת, משך, מחיר, תמונה, רשימת כלול, וכפתור וואטסאפ. -->
+  <!-- המחירים פיקטיביים לדוגמה - ערכו לפי הצורך. data-wa = טקסט ההודעה. -->
+  <section class="wrap reveal">
+    <div class="eyebrow"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#6e2433" stroke-width="1.4"/><circle cx="16" cy="16" r="3" fill="#6e2433"/></svg>חבילות נבחרות</div>
+    <h2 class="title">דילים שנבנו <em>באהבה</em></h2>
+    <p class="lead">חבילות לדוגמה, וכולן ניתנות להתאמה אישית מלאה. בחרו את הקרובה לליבכם ונצא לדרך.</p>
+    <div style="height:26px"></div>
+    <div class="deals__list">
+
+      <!-- דיל 1 -->
+      <article class="deal">
+        <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=700&q=80')">
+          <span class="deal__tag">קולינריה · עירוני</span>
+          <div class="deal__name"><h3>סוף שבוע קולינרי בטביליסי</h3><span class="dur">4 ימים / 3 לילות</span></div>
+        </div>
+        <div class="deal__body">
+          <ul class="deal__inc">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודה לכל נוסע</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>3 לילות במלון בוטיק בלב העיר העתיקה</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>סדנת בישול חצ'אפורי + סיור טעימות בשוק</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>סיור מודרך ביין וגבינות גאורגיות</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טרנספרים פרטיים משדה התעופה ובחזרה</li>
+          </ul>
+          <div class="deal__foot">
+            <div class="deal__price"><small>החל מ־</small><b>590<span> $ לאדם</span></b></div>
+            <a class="wa-btn" data-wa='היי גבי, אשמח לקבל פרטים על החבילה: "סוף שבוע קולינרי בטביליסי". מתי אפשר לדבר?'><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- דיל 2 -->
+      <article class="deal">
+        <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&w=700&q=80')">
+          <span class="deal__tag">הרפתקה · 4x4</span>
+          <div class="deal__name"><h3>הרפתקת ג'יפים בקזבגי</h3><span class="dur">5 ימים / 4 לילות</span></div>
+        </div>
+        <div class="deal__body">
+          <ul class="deal__inc">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודה</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>4 לילות בגסטהאוס הררי עם נוף לקזבק</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>2 ימי טיולי ג'יפ 4x4 עם נהג מקומי</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טרק מודרך לכנסיית גרגטי</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>כל ההעברות והטרנספרים הפנימיים</li>
+          </ul>
+          <div class="deal__foot">
+            <div class="deal__price"><small>החל מ־</small><b>740<span> $ לאדם</span></b></div>
+            <a class="wa-btn" data-wa='היי גבי, אשמח לקבל פרטים על החבילה: "הרפתקת ג'יפים בקזבגי". מתי אפשר לדבר?'><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- דיל 3 -->
+      <article class="deal">
+        <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=700&q=80')">
+          <span class="deal__tag">חורף · סקי פרימיום</span>
+          <div class="deal__name"><h3>חופשת סקי יוקרתית בגודאורי</h3><span class="dur">6 ימים / 5 לילות</span></div>
+        </div>
+        <div class="deal__body">
+          <ul class="deal__inc">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודת ציוד סקי</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>5 לילות במלון סקי-אין/אאוט 4-5 כוכבים</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>סקיפס ל-5 ימים + השכרת ציוד מלא</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>מדריך סקי פרטי לחצי יום</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טרנספרים פרטיים משדה התעופה</li>
+          </ul>
+          <div class="deal__foot">
+            <div class="deal__price"><small>החל מ־</small><b>1,180<span> $ לאדם</span></b></div>
+            <a class="wa-btn" data-wa='היי גבי, אשמח לקבל פרטים על החבילה: "חופשת סקי יוקרתית בגודאורי". מתי אפשר לדבר?'><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- דיל 4 -->
+      <article class="deal">
+        <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1474722883778-792e7990302f?auto=format&fit=crop&w=700&q=80')">
+          <span class="deal__tag">זוגי · ירח דבש</span>
+          <div class="deal__name"><h3>ירח דבש רומנטי בקאחטי</h3><span class="dur">5 ימים / 4 לילות</span></div>
+        </div>
+        <div class="deal__body">
+          <ul class="deal__inc">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודה</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>4 לילות באחוזת יין בוטיק עם נוף לכרמים</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טעימות יין פרטיות + ארוחת גורמה זוגית</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>סיור מודרך ביקבי קאחטי המסורתיים</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טרנספרים פרטיים + הפתעה רומנטית בחדר</li>
+          </ul>
+          <div class="deal__foot">
+            <div class="deal__price"><small>החל מ־</small><b>880<span> $ לזוג</span></b></div>
+            <a class="wa-btn" data-wa='היי גבי, אשמח לקבל פרטים על החבילה: "ירח דבש רומנטי בקאחטי". מתי אפשר לדבר?'><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- דיל 5 -->
+      <article class="deal">
+        <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80')">
+          <span class="deal__tag">ים ועיר · נופש</span>
+          <div class="deal__name"><h3>בריזה ימית בבטומי</h3><span class="dur">5 ימים / 4 לילות</span></div>
+        </div>
+        <div class="deal__body">
+          <ul class="deal__inc">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודה</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>4 לילות במלון מול הים על הטיילת</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>סיור עירוני מודרך + הגן הבוטני המפורסם</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>ערב חופשי בבולוורד ובאזור הקזינו</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טרנספרים פרטיים משדה התעופה</li>
+          </ul>
+          <div class="deal__foot">
+            <div class="deal__price"><small>החל מ־</small><b>690<span> $ לאדם</span></b></div>
+            <a class="wa-btn" data-wa='היי גבי, אשמח לקבל פרטים על החבילה: "בריזה ימית בבטומי". מתי אפשר לדבר?'><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- דיל 6 -->
+      <article class="deal">
+        <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=700&q=80')">
+          <span class="deal__tag">משפחתי · הכל כלול</span>
+          <div class="deal__name"><h3>טיול טבע משפחתי מורחב</h3><span class="dur">8 ימים / 7 לילות</span></div>
+        </div>
+        <div class="deal__body">
+          <ul class="deal__inc">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודה לכל המשפחה</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>7 לילות במלונות משפחתיים + ארוחות בוקר</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>רכב פרטי עם נהג לכל ימי הטיול</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>סיורים מודרכים + פעילויות מותאמות לילדים</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>כל ההעברות והטרנספרים בין היעדים</li>
+          </ul>
+          <div class="deal__foot">
+            <div class="deal__price"><small>החל מ־</small><b>1,450<span> $ לאדם</span></b></div>
+            <a class="wa-btn" data-wa='היי גבי, אשמח לקבל פרטים על החבילה: "טיול טבע משפחתי מורחב". מתי אפשר לדבר?'><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ===================== [7] שאלון התאמה (3 שלבים) ===================== -->
+  <section class="wrap quiz reveal" id="quiz">
+    <div class="eyebrow"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#c8a874" stroke-width="1.4"/><circle cx="16" cy="16" r="3" fill="#c8a874"/></svg>התאמה אישית</div>
+    <h2 class="title">בואו נמצא לכם <em>את הטיול</em></h2>
+    <p class="lead">3 שאלות קצרות, ואחזור אליכם עם הצעה תפורה בדיוק עליכם.</p>
+    <div style="height:26px"></div>
+    <div class="quiz__card">
+      <div class="quiz__prog"><div class="pd on"></div><div class="pd"></div><div class="pd"></div></div>
+      <div class="quiz__step active" data-step="1">
+        <div class="quiz__q">עם מי אתם מטיילים?</div>
+        <div class="quiz__hint">שאלה 1 מתוך 3</div>
+        <div class="quiz__opts" data-group="who">
+          <button class="opt" data-val="זוג"><span class="emo">❤️</span><span class="lbl">זוגי / רומנטי</span><span class="ck"></span></button>
+          <button class="opt" data-val="משפחה עם ילדים"><span class="emo">👨‍👩‍👧</span><span class="lbl">משפחה עם ילדים</span><span class="ck"></span></button>
+          <button class="opt" data-val="חבורת חברים"><span class="emo">🎉</span><span class="lbl">חבורת חברים</span><span class="ck"></span></button>
+          <button class="opt" data-val="טיול יחיד"><span class="emo">🧭</span><span class="lbl">לבד / סולו</span><span class="ck"></span></button>
+        </div>
+        <div class="qnav"><button class="qn" disabled>הבא</button></div>
       </div>
-      <div class="deal__body">
-        <ul class="deal__inc">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודה</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>2 ימי טיולי ג'יפ 4x4 עם נהג מקומי</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>לינה בגסטהאוס הררי עם נוף לקזבק</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>טרק מודרך לכנסיית גרגטי</li>
-        </ul>
-        <div class="deal__foot">
-          <div class="deal__price"><small>החל מ־</small><b>740<span>$ לאדם</span></b></div>
-          <a class="btn-wa" data-deal="הרפתקת ג'יפים בקזבגי" href="#">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים
-          </a>
+      <div class="quiz__step" data-step="2">
+        <div class="quiz__q">איזה סגנון מדבר אליכם?</div>
+        <div class="quiz__hint">שאלה 2 מתוך 3</div>
+        <div class="quiz__opts" data-group="style">
+          <button class="opt" data-val="קולינריה ויין"><span class="emo">🍷</span><span class="lbl">קולינריה, יין וטעמים</span><span class="ck"></span></button>
+          <button class="opt" data-val="הרפתקה וטבע"><span class="emo">🏔️</span><span class="lbl">הרפתקה, ג'יפים וטבע</span><span class="ck"></span></button>
+          <button class="opt" data-val="סקי וחורף"><span class="emo">⛷️</span><span class="lbl">סקי וחופשת חורף</span><span class="ck"></span></button>
+          <button class="opt" data-val="ים ורוגע"><span class="emo">🌊</span><span class="lbl">ים, רוגע ופינוק</span><span class="ck"></span></button>
+        </div>
+        <div class="qnav"><button class="qb">הקודם</button><button class="qn" disabled>הבא</button></div>
+      </div>
+      <div class="quiz__step" data-step="3">
+        <div class="quiz__q">לאן לחזור אליכם?</div>
+        <div class="quiz__hint">שאלה 3 מתוך 3 · ואני שולח לכם הצעה</div>
+        <div class="qf"><label for="qname">השם שלכם</label><input type="text" id="qname" placeholder="לדוגמה: דנה לוי" autocomplete="name"></div>
+        <div class="qf"><label for="qdates">תאריכים משוערים (לא חובה)</label><input type="text" id="qdates" placeholder="לדוגמה: סוף אוגוסט, 5 לילות" autocomplete="off"></div>
+        <div class="qnav">
+          <button class="qb">הקודם</button>
+          <button class="qn qsub" id="quizSend" disabled><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>שלחו לי הצעה</button>
         </div>
       </div>
-    </article>
-
-    <!-- DEAL 3: סקי בגודאורי -->
-    <article class="deal">
-      <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=700&q=80')">
-        <span class="deal__tag">חורף · סקי פרימיום</span>
-        <div class="deal__title"><h3>חופשת סקי יוקרתית בגודאורי</h3><span class="dur">6 ימים / 5 לילות</span></div>
-      </div>
-      <div class="deal__body">
-        <ul class="deal__inc">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודת ציוד סקי</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>מלון סקי-אין/סקי-אאוט ברמת 4-5 כוכבים</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>סקיפס ל-5 ימים + השכרת ציוד מלא</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>טרנספרים פרטיים + אופציית מדריך</li>
-        </ul>
-        <div class="deal__foot">
-          <div class="deal__price"><small>החל מ־</small><b>1,180<span>$ לאדם</span></b></div>
-          <a class="btn-wa" data-deal="חופשת סקי יוקרתית בגודאורי" href="#">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- DEAL 4: ירח דבש בקאחטי -->
-    <article class="deal">
-      <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1474722883778-792e7990302f?auto=format&fit=crop&w=700&q=80')">
-        <span class="deal__tag">זוגי · ירח דבש</span>
-        <div class="deal__title"><h3>ירח דבש רומנטי בקאחטי</h3><span class="dur">5 ימים / 4 לילות</span></div>
-      </div>
-      <div class="deal__body">
-        <ul class="deal__inc">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודה</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>אחוזת יין בוטיק עם נוף לכרמים</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>טעימות יין פרטיות + ארוחת גורמה זוגית</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>הפתעה רומנטית בחדר עם הגעתכם</li>
-        </ul>
-        <div class="deal__foot">
-          <div class="deal__price"><small>החל מ־</small><b>880<span>$ לזוג</span></b></div>
-          <a class="btn-wa" data-deal="ירח דבש רומנטי בקאחטי" href="#">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים
-          </a>
-        </div>
-      </div>
-    </article>
-
-    <!-- DEAL 5: משפחתי הכל כלול -->
-    <article class="deal">
-      <div class="deal__head" style="background-image:url('https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=700&q=80')">
-        <span class="deal__tag">משפחתי · הכל כלול</span>
-        <div class="deal__title"><h3>טיול טבע משפחתי מורחב</h3><span class="dur">8 ימים / 7 לילות</span></div>
-      </div>
-      <div class="deal__body">
-        <ul class="deal__inc">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>טיסות הלוך-חזור + כבודה לכל המשפחה</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>מלונות משפחתיים מרווחים + ארוחות בוקר</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>רכב פרטי עם נהג לכל ימי הטיול</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>סיורים מודרכים + פעילויות לילדים</li>
-        </ul>
-        <div class="deal__foot">
-          <div class="deal__price"><small>החל מ־</small><b>1,450<span>$ לאדם</span></b></div>
-          <a class="btn-wa" data-deal="טיול טבע משפחתי מורחב" href="#">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>אני רוצה פרטים
-          </a>
-        </div>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- [7] QUIZ · שאלון התאמה אישי (3 שלבים)                       -->
-<!-- ההיגיון בונה הודעת וואטסאפ דינמית. ראו <script> בתחתית.      -->
-<!-- ============================================================ -->
-<section class="section quiz" id="quiz">
-  <div class="eyebrow">התאמה אישית</div>
-  <h2 class="h-title">בואו נמצא לכם את הטיול</h2>
-  <p class="lead">3 שאלות קצרות, ואני אחזור אליכם עם הצעה תפורה בדיוק עליכם.</p>
-
-  <div class="quiz__card">
-    <div class="quiz__progress">
-      <div class="pdot on"></div><div class="pdot"></div><div class="pdot"></div>
     </div>
+  </section>
 
-    <!-- שלב 1 -->
-    <div class="quiz__step active" data-step="1">
-      <div class="quiz__q">עם מי אתם מטיילים?</div>
-      <div class="quiz__hint">שאלה 1 מתוך 3</div>
-      <div class="quiz__opts" data-group="who">
-        <button class="opt" data-val="זוג"><span class="emo">❤️</span>זוגי / רומנטי<span class="check"></span></button>
-        <button class="opt" data-val="משפחה עם ילדים"><span class="emo">👨‍👩‍👧</span>משפחה עם ילדים<span class="check"></span></button>
-        <button class="opt" data-val="חבורת חברים"><span class="emo">🎉</span>חבורת חברים<span class="check"></span></button>
-        <button class="opt" data-val="טיול יחיד"><span class="emo">🧭</span>לבד / סולו<span class="check"></span></button>
-      </div>
-      <div class="quiz__nav">
-        <button class="btn-next" disabled>הבא</button>
-      </div>
+  <!-- ===================== [8] המלצות מטיילים (5) ===================== -->
+  <section class="wrap reveal">
+    <div class="eyebrow"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#6e2433" stroke-width="1.4"/><circle cx="16" cy="16" r="3" fill="#6e2433"/></svg>מטיילים משתפים</div>
+    <h2 class="title">מה אומרים <em>עליי</em></h2>
+    <div style="height:26px"></div>
+    <div class="tcard"><span class="tcard__mark">”</span><div class="tstars">★★★★★</div><blockquote>גבי תכנן לנו ירח דבש שלא נשכח. כל מלון היה פנינה, וכשהתבלבלנו עם השכרת רכב הוא פתר את זה תוך דקות בוואטסאפ. מסירות ברמה אחרת.</blockquote><div class="tcard__p"><div class="tav" style="background:#6e2433">ר.מ</div><div><b>רוני ומאיה</b><small>ירח דבש בקאחטי</small></div></div></div>
+    <div class="tcard"><span class="tcard__mark">”</span><div class="tstars">★★★★★</div><blockquote>נסענו משפחה עם שלושה ילדים וחששנו מהלוגיסטיקה. גבי דאג לכל פרט, הנהג היה מקסים והילדים לא הפסיקו לדבר על מסלולי הג'יפים. ארגון מושלם.</blockquote><div class="tcard__p"><div class="tav" style="background:#a9823c">א.ב</div><div><b>משפחת ברק</b><small>טיול משפחתי מורחב</small></div></div></div>
+    <div class="tcard"><span class="tcard__mark">”</span><div class="tstars">★★★★★</div><blockquote>הטיסה שלנו בוטלה ברגע האחרון, וגבי כבר היה על זה לפנינו עם פתרון חלופי. הרגשנו שיש לנו גב לאורך כל הדרך. שווה כל שקל.</blockquote><div class="tcard__p"><div class="tav" style="background:#2b1018">ד.כ</div><div><b>דורון כהן</b><small>הרפתקת ג'יפים בקזבגי</small></div></div></div>
+    <div class="tcard"><span class="tcard__mark">”</span><div class="tstars">★★★★★</div><blockquote>ההמלצות המקומיות של גבי היו בול. מסעדות שלא היינו מוצאים לבד, יקב נסתר שהפך לרגע השיא של הטיול. ניכר שהוא באמת מכיר את גאורגיה.</blockquote><div class="tcard__p"><div class="tav" style="background:#6e2433">ט.ש</div><div><b>טל שפירא</b><small>סוף שבוע קולינרי</small></div></div></div>
+    <div class="tcard"><span class="tcard__mark">”</span><div class="tstars">★★★★★</div><blockquote>נסעתי לבד והרגשתי בידיים טובות מהרגע הראשון. גבי היה זמין בכל שעה, גם כשהיה הפרש שעות. ליווי אישי במלוא מובן המילה. כבר מתכננים את הבא.</blockquote><div class="tcard__p"><div class="tav" style="background:#a9823c">ע.ל</div><div><b>ענת לביא</b><small>טיול סולו בגאורגיה</small></div></div></div>
+  </section>
+
+  <div class="sealdiv"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#a9823c" stroke-width="1"/><circle cx="16" cy="16" r="9" stroke="#a9823c" stroke-width=".7" opacity=".5"/><circle cx="16" cy="16" r="2.4" fill="#6e2433"/></svg></div>
+
+  <!-- ===================== [9] שאלות נפוצות (5) ===================== -->
+  <section class="wrap reveal">
+    <div class="eyebrow"><svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#6e2433" stroke-width="1.4"/><circle cx="16" cy="16" r="3" fill="#6e2433"/></svg>שאלות נפוצות</div>
+    <h2 class="title">כל מה שחשוב <em>לדעת</em></h2>
+    <div style="height:20px"></div>
+    <div class="faq__list">
+      <div class="faq__item"><button class="faq__q">איך עובד הליווי האישי שלך?<i></i></button><div class="faq__a"><p>אני מלווה אתכם מהשיחה הראשונה: בונה איתכם את המסלול, מזמין הכל בעצמי, וזמין בוואטסאפ לכל שאלה לאורך כל הטיול. אתם לא מדברים עם מוקד, אתם מדברים איתי.</p></div></div>
+      <div class="faq__item"><button class="faq__q">מה קורה אם טיסה מבוטלת או משתנה?<i></i></button><div class="faq__a"><p>אני עוקב אחרי הטיסות שלכם ופועל מיד במקרה של שינוי או ביטול, כולל מציאת חלופות וסידור מחדש של הלוגיסטיקה בשטח. המטרה שלי שתרגישו מוגנים בכל תרחיש.</p></div></div>
+      <div class="faq__item"><button class="faq__q">האם כל טיול באמת מותאם אישית?<i></i></button><div class="faq__a"><p>בהחלט. הדילים באתר הם נקודת פתיחה בלבד. אנחנו מתאימים יחד את הקצב, רמת המלונות, האטרקציות והתקציב בדיוק לאופי שלכם.</p></div></div>
+      <div class="faq__item"><button class="faq__q">מתי הזמן הטוב ביותר לטוס לגאורגיה?<i></i></button><div class="faq__a"><p>תלוי באופי הטיול: אביב וסתיו מושלמים לטבע ויין, החורף לסקי בגודאורי, והקיץ לטיולי הרים ולחופי בטומי. אשמח להמליץ לכם לפי מה שאתם מחפשים.</p></div></div>
+      <div class="faq__item"><button class="faq__q">האם צריך ויזה לגאורגיה?<i></i></button><div class="faq__a"><p>אזרחי ישראל פטורים מויזה לשהייה תיירותית. אני אדאג לעדכן אתכם בכל הדרישות העדכניות ובמסמכים הנדרשים לפני הנסיעה.</p></div></div>
     </div>
+  </section>
 
-    <!-- שלב 2 -->
-    <div class="quiz__step" data-step="2">
-      <div class="quiz__q">איזה סגנון מדבר אליכם?</div>
-      <div class="quiz__hint">שאלה 2 מתוך 3</div>
-      <div class="quiz__opts" data-group="style">
-        <button class="opt" data-val="קולינריה ויין"><span class="emo">🍷</span>קולינריה, יין וטעמים<span class="check"></span></button>
-        <button class="opt" data-val="הרפתקה וטבע"><span class="emo">🏔️</span>הרפתקה, ג'יפים וטבע<span class="check"></span></button>
-        <button class="opt" data-val="סקי וחורף"><span class="emo">⛷️</span>סקי וחופשת חורף<span class="check"></span></button>
-        <button class="opt" data-val="רוגע ופינוק"><span class="emo">🧖</span>רוגע, נופש ופינוק<span class="check"></span></button>
-      </div>
-      <div class="quiz__nav">
-        <button class="btn-back">הקודם</button>
-        <button class="btn-next" disabled>הבא</button>
-      </div>
+  <!-- ===================== [10] פוטר ===================== -->
+  <footer class="footer">
+    <svg class="seal" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#c8a874" stroke-width="1"/><circle cx="16" cy="16" r="9" stroke="#c8a874" stroke-width=".7" opacity=".55"/><circle cx="16" cy="16" r="2.4" fill="#c8a874"/></svg>
+    <div class="footer__brand">סאני טורס</div>
+    <div class="footer__tag">טיולי בוטיק בהתאמה אישית לגאורגיה</div>
+    <div class="footer__cred">
+      <a class="js-wa" data-wa="היי, אשמח לפרטים על טיול לגאורגיה"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg><span class="js-phone"></span></a>
+      <a class="js-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg><span class="js-email"></span></a>
     </div>
+    <div class="footer__copy">© <span id="year"></span> סאני טורס · גבי שמש. כל הזכויות שמורות.</div>
+  </footer>
 
-    <!-- שלב 3 -->
-    <div class="quiz__step" data-step="3">
-      <div class="quiz__q">לאן לחזור אליכם?</div>
-      <div class="quiz__hint">שאלה 3 מתוך 3 · ואני שולח לכם הצעה</div>
-      <div class="quiz__field">
-        <label for="qname">השם שלכם</label>
-        <input type="text" id="qname" placeholder="לדוגמה: דנה לוי" autocomplete="name">
-      </div>
-      <div class="quiz__field">
-        <label for="qdates">תאריכים משוערים (לא חובה)</label>
-        <input type="text" id="qdates" placeholder="לדוגמה: סוף אוגוסט, 5 לילות" autocomplete="off">
-      </div>
-      <div class="quiz__nav">
-        <button class="btn-back">הקודם</button>
-        <button class="btn-next btn-submit" id="quizSend" disabled>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>
-          שלחו לי הצעה
-        </button>
-      </div>
-    </div>
+  <a class="wa-float js-wa" data-wa="היי גבי, אשמח לשמוע עוד על טיולי גאורגיה" aria-label="שיחה בוואטסאפ"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.5 14.2c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.6-1-2.3-1-3.8-3.4-3.9-3.6-.1-.2-1-1.3-1-2.5s.6-1.7.8-2c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2 1.3 2.3 1.5.2.1.4 0 .5-.1l.7-.8c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.8-.1 1.5z"/></svg></a>
 
-  </div>
-</section>
+</div>
 
-<!-- ============================================================ -->
-<!-- [8] TESTIMONIALS · 5 המלצות                                 -->
-<!-- ============================================================ -->
-<section class="section testimonials">
-  <div class="eyebrow">מטיילים משתפים</div>
-  <h2 class="h-title">מה אומרים עליי</h2>
-
-  <!-- T1 -->
-  <div class="tcard">
-    <div class="tstars">★★★★★</div>
-    <blockquote>גבי תכנן לנו ירח דבש שלא נשכח. כל מלון היה פנינה, וכשהתבלבלנו עם השכרת רכב הוא פתר את זה תוך דקות בוואטסאפ. מסירות ברמה אחרת.</blockquote>
-    <div class="tcard__person">
-      <div class="tavatar" style="background:#1f5740">ר.מ</div>
-      <div><b>רוני ומאיה</b><span>ירח דבש בקאחטי</span></div>
-    </div>
-  </div>
-
-  <!-- T2 -->
-  <div class="tcard">
-    <div class="tstars">★★★★★</div>
-    <blockquote>נסענו משפחה עם שלושה ילדים וחששנו מהלוגיסטיקה. גבי דאג לכל פרט, הנהג היה מקסים והילדים לא הפסיקו לדבר על מסלולי הג'יפים. ארגון מושלם.</blockquote>
-    <div class="tcard__person">
-      <div class="tavatar" style="background:#b4502e">א.ב</div>
-      <div><b>משפחת ברק</b><span>טיול משפחתי מורחב</span></div>
-    </div>
-  </div>
-
-  <!-- T3 -->
-  <div class="tcard">
-    <div class="tstars">★★★★★</div>
-    <blockquote>הטיסה שלנו בוטלה ברגע האחרון, וגבי כבר היה על זה לפנינו עם פתרון חלופי. הרגשנו שיש לנו גב לאורך כל הדרך. שווה כל שקל.</blockquote>
-    <div class="tcard__person">
-      <div class="tavatar" style="background:#13392a">ד.כ</div>
-      <div><b>דורון כהן</b><span>הרפתקת ג'יפים בקזבגי</span></div>
-    </div>
-  </div>
-
-  <!-- T4 -->
-  <div class="tcard">
-    <div class="tstars">★★★★★</div>
-    <blockquote>ההמלצות המקומיות של גבי היו בול. מסעדות שלא היינו מוצאים לבד, יקב נסתר שהפך לרגע השיא של הטיול. ניכר שהוא באמת מכיר את גאורגיה.</blockquote>
-    <div class="tcard__person">
-      <div class="tavatar" style="background:#1f5740">ט.ש</div>
-      <div><b>טל שפירא</b><span>סוף שבוע קולינרי</span></div>
-    </div>
-  </div>
-
-  <!-- T5 -->
-  <div class="tcard">
-    <div class="tstars">★★★★★</div>
-    <blockquote>נסעתי לבד והרגשתי בידיים טובות מהרגע הראשון. גבי היה זמין בכל שעה, גם כשהיה הפרש שעות. ליווי אישי במלוא מובן המילה. כבר מתכננים את הבא.</blockquote>
-    <div class="tcard__person">
-      <div class="tavatar" style="background:#b4502e">ע.ל</div>
-      <div><b>ענת לביא</b><span>טיול סולו בגאורגיה</span></div>
-    </div>
-  </div>
-
-</section>
-
-<!-- ============================================================ -->
-<!-- [9] FAQ · אקורדיון                                          -->
-<!-- ============================================================ -->
-<section class="section faq">
-  <div class="eyebrow">שאלות נפוצות</div>
-  <h2 class="h-title">כל מה שחשוב לדעת</h2>
-  <div class="faq__list">
-
-    <div class="faq__item">
-      <button class="faq__q">איך עובד הליווי האישי שלך?<span class="ico">+</span></button>
-      <div class="faq__a"><p>אני מלווה אתכם מהשיחה הראשונה: בונה איתכם את המסלול, מזמין הכל בעצמי, וזמין בוואטסאפ לכל שאלה לאורך כל הטיול. אתם לא מדברים עם מוקד, אתם מדברים איתי.</p></div>
-    </div>
-
-    <div class="faq__item">
-      <button class="faq__q">מה קורה אם טיסה מבוטלת או משתנה?<span class="ico">+</span></button>
-      <div class="faq__a"><p>אני עוקב אחרי הטיסות שלכם ופועל מיד במקרה של שינוי או ביטול, כולל מציאת חלופות וסידור מחדש של הלוגיסטיקה בשטח. המטרה שלי שתרגישו מוגנים בכל תרחיש.</p></div>
-    </div>
-
-    <div class="faq__item">
-      <button class="faq__q">האם כל טיול באמת מותאם אישית?<span class="ico">+</span></button>
-      <div class="faq__a"><p>בהחלט. הדילים באתר הם נקודת פתיחה בלבד. אנחנו מתאימים יחד את הקצב, רמת המלונות, האטרקציות והתקציב בדיוק לאופי שלכם.</p></div>
-    </div>
-
-    <div class="faq__item">
-      <button class="faq__q">מתי הזמן הטוב ביותר לטוס לגאורגיה?<span class="ico">+</span></button>
-      <div class="faq__a"><p>תלוי באופי הטיול: אביב וסתיו מושלמים לטבע ויין, החורף לסקי בגודאורי, והקיץ לטיולי הרים ומנוסה מהחום. אשמח להמליץ לכם לפי מה שאתם מחפשים.</p></div>
-    </div>
-
-    <div class="faq__item">
-      <button class="faq__q">האם צריך ויזה לגאורגיה?<span class="ico">+</span></button>
-      <div class="faq__a"><p>אזרחי ישראל פטורים מויזה לשהייה תיירותית. אני אדאג לעדכן אתכם בכל הדרישות העדכניות ובמסמכים הנדרשים לפני הנסיעה.</p></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- [10] FOOTER                                                  -->
-<!-- ============================================================ -->
-<footer class="footer">
-  <div class="footer__brand"><span class="dot"></span>סאני טורס</div>
-  <div class="footer__tag">טיולי בוטיק בהתאמה אישית לגאורגיה</div>
-  <div class="footer__cred">
-    <a href="https://wa.me/972528989677" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>
-      <span>+972 52-898-9677</span>
-    </a>
-    <a href="mailto:ss@gmail.com">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
-      <span>ss@gmail.com</span>
-    </a>
-  </div>
-  <div class="footer__copy">© <span id="year"></span> סאני טורס · גבי שמש. כל הזכויות שמורות.</div>
-</footer>
-
-<!-- כפתור וואטסאפ צף (נעול לפינה שמאלית תחתונה) -->
-<a class="wa-float" href="https://wa.me/972528989677?text=%D7%94%D7%99%D7%99%20%D7%92%D7%91%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%95%D7%93%20%D7%A2%D7%9C%20%D7%98%D7%99%D7%95%D7%9C%D7%99%20%D7%92%D7%90%D7%95%D7%A8%D7%92%D7%99%D7%94" target="_blank" rel="noopener" aria-label="שיחה בוואטסאפ">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.5 14.2c-.2.6-1.2 1.2-1.7 1.2-.4 0-1 .1-3.6-1-2.3-1-3.8-3.4-3.9-3.6-.1-.2-1-1.3-1-2.5s.6-1.7.8-2c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.5c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2 1.3 2.3 1.5.2.1.4 0 .5-.1l.7-.8c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.8-.1 1.5z"/></svg>
-</a>
-
-</div><!-- /.shell -->
-
-<!-- ============================================================ -->
-<!-- SCRIPT · התנהגות דינמית                                      -->
-<!-- *** מספר הוואטסאפ המרכזי: ערכו כאן בלבד ***                  -->
-<!-- ============================================================ -->
 <script>
+/* ====== הגדרות מרכזיות - ערכו כאן בלבד ====== */
+var PHONE = "972528989677";          /* מספר וואטסאפ, ספרות בלבד עם קידומת מדינה */
+var EMAIL = "SunyTors@gmail.com";     /* כתובת אימייל */
+
 (function(){
   "use strict";
+  function wa(t){return "https://wa.me/"+PHONE+"?text="+encodeURIComponent(t);}
+  var disp="+"+PHONE;
 
-  /* ====== הגדרה מרכזית: מספר וואטסאפ ====== */
-  var WA_PHONE = "972528989677";
-
-  function waLink(text){
-    return "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(text);
-  }
-
-  /* ====== שנה נוכחית בכותרת התחתית ====== */
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  /* ====== כפתורי וואטסאפ בכרטיסי הדילים ====== */
-  document.querySelectorAll(".btn-wa[data-deal]").forEach(function(btn){
-    var deal = btn.getAttribute("data-deal");
-    var msg = "היי גבי, אשמח לקבל פרטים על החבילה: \"" + deal + "\". מתי אפשר לדבר?";
-    btn.setAttribute("href", waLink(msg));
-    btn.setAttribute("target", "_blank");
-    btn.setAttribute("rel", "noopener");
+  document.getElementById("year").textContent=new Date().getFullYear();
+  document.querySelectorAll(".js-phone").forEach(function(e){e.textContent=disp;});
+  document.querySelectorAll(".js-email").forEach(function(e){e.textContent=EMAIL;});
+  document.querySelectorAll(".js-tel").forEach(function(e){e.setAttribute("href","tel:+"+PHONE);});
+  document.querySelectorAll(".js-mail").forEach(function(e){e.setAttribute("href","mailto:"+EMAIL);});
+  document.querySelectorAll("[data-wa]").forEach(function(e){
+    e.setAttribute("href",wa(e.getAttribute("data-wa")));
+    e.setAttribute("target","_blank");e.setAttribute("rel","noopener");
   });
 
-  /* ====== אקורדיון FAQ ====== */
+  /* אקורדיון שאלות נפוצות */
   document.querySelectorAll(".faq__item").forEach(function(item){
-    var q = item.querySelector(".faq__q");
-    var a = item.querySelector(".faq__a");
-    q.addEventListener("click", function(){
-      var open = item.classList.contains("open");
-      // סגירת כל השאר (התנהגות אקורדיון)
-      document.querySelectorAll(".faq__item.open").forEach(function(other){
-        if(other !== item){ other.classList.remove("open"); other.querySelector(".faq__a").style.maxHeight = null; }
-      });
-      if(open){ item.classList.remove("open"); a.style.maxHeight = null; }
-      else{ item.classList.add("open"); a.style.maxHeight = a.scrollHeight + "px"; }
+    var q=item.querySelector(".faq__q"),a=item.querySelector(".faq__a");
+    q.addEventListener("click",function(){
+      var open=item.classList.contains("open");
+      document.querySelectorAll(".faq__item.open").forEach(function(o){if(o!==item){o.classList.remove("open");o.querySelector(".faq__a").style.maxHeight=null;}});
+      if(open){item.classList.remove("open");a.style.maxHeight=null;}
+      else{item.classList.add("open");a.style.maxHeight=a.scrollHeight+"px";}
     });
   });
 
-  /* ====== שאלון התאמה (3 שלבים) ====== */
-  var answers = { who:"", style:"", name:"", dates:"" };
-  var steps = document.querySelectorAll(".quiz__step");
-  var dots  = document.querySelectorAll(".quiz__progress .pdot");
-  var current = 1;
+  /* שאלון התאמה */
+  var ans={who:"",style:"",name:"",dates:""},cur=1;
+  var steps=document.querySelectorAll(".quiz__step"),dots=document.querySelectorAll(".quiz__prog .pd");
+  function rf(){var a=document.querySelector('.quiz__step[data-step="'+cur+'"]');if(!a)return;
+    var n=a.querySelector(".qn:not(.qsub)"),s=a.querySelector(".qsub");
+    if(cur===1&&n)n.disabled=!ans.who;if(cur===2&&n)n.disabled=!ans.style;if(cur===3&&s)s.disabled=!ans.name;}
+  function show(k){cur=k;steps.forEach(function(s){s.classList.toggle("active",+s.dataset.step===k);});
+    dots.forEach(function(d,i){d.classList.toggle("on",i<k);});
+    var q=document.getElementById("quiz");if(q)q.scrollIntoView({behavior:"smooth",block:"start"});rf();}
+  document.querySelectorAll(".quiz__opts").forEach(function(g){var key=g.getAttribute("data-group");
+    g.querySelectorAll(".opt").forEach(function(o){o.addEventListener("click",function(){
+      g.querySelectorAll(".opt").forEach(function(z){z.classList.remove("sel");});
+      o.classList.add("sel");ans[key]=o.getAttribute("data-val");rf();});});});
+  var nm=document.getElementById("qname"),dt=document.getElementById("qdates");
+  nm.addEventListener("input",function(){ans.name=nm.value.trim();rf();});
+  dt.addEventListener("input",function(){ans.dates=dt.value.trim();});
+  document.querySelectorAll(".qn:not(.qsub)").forEach(function(b){b.addEventListener("click",function(){if(!b.disabled&&cur<3)show(cur+1);});});
+  document.querySelectorAll(".qb").forEach(function(b){b.addEventListener("click",function(){if(cur>1)show(cur-1);});});
+  document.getElementById("quizSend").addEventListener("click",function(){
+    if(!ans.name)return;
+    var L=["היי גבי! מילאתי את שאלון ההתאמה באתר 🙂","","שם: "+ans.name,"הרכב הקבוצה: "+(ans.who||"לא צוין"),
+      "סגנון מועדף: "+(ans.style||"לא צוין"),"תאריכים: "+(ans.dates||"גמיש / עוד לא נקבע"),"",
+      "אשמח לקבל הצעה מותאמת אישית לטיול בגאורגיה. תודה!"];
+    window.open(wa(L.join("\n")),"_blank","noopener");});
 
-  function showStep(n){
-    current = n;
-    steps.forEach(function(s){ s.classList.toggle("active", +s.dataset.step === n); });
-    dots.forEach(function(d,i){ d.classList.toggle("on", i < n); });
-    var active = document.querySelector('.quiz__step[data-step="'+n+'"]');
-    var scope = document.querySelector(".quiz");
-    if(scope) scope.scrollIntoView({behavior:"smooth", block:"start"});
-    refreshButtons();
-  }
-
-  // בחירת אופציה בשלבים 1-2
-  document.querySelectorAll(".quiz__opts").forEach(function(group){
-    var key = group.getAttribute("data-group");
-    group.querySelectorAll(".opt").forEach(function(opt){
-      opt.addEventListener("click", function(){
-        group.querySelectorAll(".opt").forEach(function(o){ o.classList.remove("sel"); });
-        opt.classList.add("sel");
-        answers[key] = opt.getAttribute("data-val");
-        refreshButtons();
-      });
-    });
-  });
-
-  // קלט שם (מפעיל את כפתור השליחה)
-  var nameInput = document.getElementById("qname");
-  var datesInput = document.getElementById("qdates");
-  nameInput.addEventListener("input", function(){ answers.name = nameInput.value.trim(); refreshButtons(); });
-  datesInput.addEventListener("input", function(){ answers.dates = datesInput.value.trim(); });
-
-  function refreshButtons(){
-    var active = document.querySelector('.quiz__step[data-step="'+current+'"]');
-    if(!active) return;
-    var next = active.querySelector(".btn-next:not(.btn-submit)");
-    var send = active.querySelector(".btn-submit");
-    if(current === 1 && next) next.disabled = !answers.who;
-    if(current === 2 && next) next.disabled = !answers.style;
-    if(current === 3 && send) send.disabled = !answers.name;
-  }
-
-  // ניווט קדימה/אחורה
-  document.querySelectorAll(".btn-next:not(.btn-submit)").forEach(function(b){
-    b.addEventListener("click", function(){ if(!b.disabled && current < 3) showStep(current+1); });
-  });
-  document.querySelectorAll(".btn-back").forEach(function(b){
-    b.addEventListener("click", function(){ if(current > 1) showStep(current-1); });
-  });
-
-  // שליחה → בניית הודעת וואטסאפ דינמית
-  document.getElementById("quizSend").addEventListener("click", function(){
-    if(!answers.name) return;
-    var lines = [
-      "היי גבי! מילאתי את שאלון ההתאמה באתר 🙂",
-      "",
-      "שם: " + answers.name,
-      "הרכב הקבוצה: " + (answers.who || "לא צוין"),
-      "סגנון מועדף: " + (answers.style || "לא צוין"),
-      "תאריכים: " + (answers.dates || "גמיש / עוד לא נקבע"),
-      "",
-      "אשמח לקבל הצעה מותאמת אישית לטיול בגאורגיה. תודה!"
-    ];
-    window.open(waLink(lines.join("\n")), "_blank", "noopener");
-  });
-
+  /* חשיפה הדרגתית בגלילה */
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.12});
+    document.querySelectorAll(".reveal").forEach(function(e){io.observe(e);});
+  }else{document.querySelectorAll(".reveal").forEach(function(e){e.classList.add("in");});}
 })();
 </script>
 </body>
