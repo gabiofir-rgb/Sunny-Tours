@@ -10,7 +10,7 @@
         body { background-color: #f8fafc; color: #1e293b; text-align: right; direction: rtl; line-height: 1.6; }
         .container { width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; }
         
-        /* מסך פתיחה - HERO */
+        /* HERO */
         .hero { background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=800') center/cover; color: white; padding: 60px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
         .badge { background-color: #f59e0b; color: #0f172a; display: inline-block; padding: 6px 16px; font-weight: bold; font-size: 13px; border-radius: 20px; margin-bottom: 15px; }
         .hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 12px; line-height: 1.3; }
@@ -18,7 +18,7 @@
         
         .btn { display: block; width: 100%; background-color: #f59e0b; color: #0f172a; text-align: center; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 16px; text-decoration: none; margin-bottom: 12px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.25); }
         
-        /* כרטיס סוכן */
+        /* AGENT CARD */
         .agent-card { background: white; border-radius: 24px; padding: 25px 20px; margin-top: -30px; margin-bottom: 30px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; text-align: center; }
         .agent-image-holder { width: 110px; height: 110px; background-color: #e2e8f0; border-radius: 50%; overflow: hidden; border: 3px solid #f59e0b; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px auto; }
         .agent-image-holder img { width: 100%; height: 100%; object-fit: cover; }
@@ -27,19 +27,18 @@
         .section-title { font-size: 22px; font-weight: 800; margin: 40px 0 15px 0; color: #0f172a; border-right: 5px solid #f59e0b; padding-right: 12px; }
         .section-subtitle { font-size: 14px; color: #64748b; margin-top: -10px; margin-bottom: 20px; padding-right: 16px; }
         
-        /* סקירה כללית גאורגיה Overview */
+        /* OVERVIEW & DESTINATIONS */
         .overview-box { background: white; border-radius: 20px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); margin-bottom: 25px; }
         .overview-text { font-size: 14px; color: #475569; text-align: justify; }
         
-        /* כרטיסי אתרים מרכזיים */
         .destination-card { background: white; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; margin-bottom: 15px; display: flex; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
         .dest-img { width: 120px; height: 120px; object-fit: cover; flex-shrink: 0; }
-        .dest-info { padding: 15px; flex-grow: 1; }
-        .dest-info h4 { font-size: 16px; font-weight: bold; color: #0f172a; margin-bottom: 5px; }
-        .dest-info p { font-size: 13px; color: #64748b; line-height: 1.4; }
+        .dest-info { padding: 12px; flex-grow: 1; }
+        .dest-info h4 { font-size: 15px; font-weight: bold; color: #0f172a; margin-bottom: 4px; }
+        .dest-info p { font-size: 12px; color: #64748b; line-height: 1.4; }
 
-        /* קוביות דילים */
-        .deal-card { background: white; border-radius: 20px; margin-bottom: 20px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03); overflow: hidden; }
+        /* DEALS */
+        .deal-card { background: white; border-radius: 20px; margin-bottom: 25px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03); overflow: hidden; }
         .deal-img-box { height: 190px; width: 100%; background-position: center; background-size: cover; }
         .deal-padding { padding: 20px; }
         .deal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
@@ -51,7 +50,7 @@
         .deal-list li i { color: #10b981; margin-top: 4px; }
         .btn-deal { background: #0f172a; color: white; padding: 12px; font-size: 14px; margin-top: 10px; }
         
-        /* שאלון התאמה */
+        /* QUIZ */
         .quiz-box { background: #1e293b; color: white; padding: 25px 20px; border-radius: 24px; margin-bottom: 25px; }
         .quiz-step h3 { font-size: 16px; color: #f59e0b; margin-bottom: 18px; font-weight: bold; }
         .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -59,14 +58,14 @@
         .quiz-input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #475569; background: #334155; color: white; margin-bottom: 12px; text-align: right; font-size: 14px; }
         .hidden { display: none; }
 
-        /* עדויות וטסטמוניאלס */
+        /* TESTIMONIALS */
         .review-card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 15px; border: 1px solid #e2e8f0; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.01); }
         .review-card i.fa-quote-left { position: absolute; left: 20px; top: 15px; color: #f1f5f9; font-size: 32px; z-index: 1; }
         .review-text { font-size: 13px; color: #475569; position: relative; z-index: 2; margin-bottom: 15px; font-style: italic; }
         .review-user { display: flex; align-items: center; gap: 10px; position: relative; z-index: 2; }
         .review-avatar { width: 40px; height: 40px; background: #eff6ff; color: #2563eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; }
 
-        /* יתר השירות */
+        /* FEATURES */
         .features-grid { background: white; border-radius: 20px; padding: 20px; border: 1px solid #e2e8f0; margin-bottom: 25px; }
         .feature-item { display: flex; gap: 15px; margin-bottom: 18px; }
         .feature-item:last-child { margin-bottom: 0; }
@@ -79,6 +78,10 @@
     </style>
 </head>
 <body>
+
+    <a href="https://api.whatsapp.com/send?phone=972528989677&text=היי גבי, הגעתי מדף הנחיתה ואשמח לשמוע על דילים מותאמים אישית לגאורגיה." target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <div class="hero">
         <div class="badge">סאני טורס - Sunny Tours</div>
@@ -116,23 +119,31 @@
             <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=400" class="dest-img" alt="טביליסי">
             <div class="dest-info">
                 <h4>טביליסי העתיקה (Tbilisi)</h4>
-                <p>בירת המדינה המשלבת סמטאות ציוריות עתיקות, מרחצאות גופרית היסטוריים, שווקי פשפשים תוססים, חיי לילה מודרניים ומסעדות שף גאורגיות מעולות.</p>
+                <p>בירת המדינה המשלבת סמטאות ציוריות עתיקות, מרחצאות גופרית היסטוריים, שווקי פשפשים תוססים, פוניקולר ותצפית מקיפה ומרהיבה על כל העיר מלמעלה.</p>
             </div>
         </div>
 
         <div class="destination-card">
-            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400" class="dest-img" alt="גודאורי">
+            <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400" class="dest-img" alt="גודאורי">
             <div class="dest-info">
-                <h4>גודאורי והקווקז הגבוה (Gudauri)</h4>
-                <p>עיירת סקי ונופש מרהיבה המשמשת כנשמת אפיים של חובבי הטבע. נופים אלפיניים עוצרי נשימה, תצפיות פנורמיות פראיות וטיולי ג'יפים ואטרקציות שטח.</p>
+                <h4>גודאורי (Gudauri)</h4>
+                <p>עיירת סקי ונופש אלפינית בגובה 2,200 מטרים בלב הקווקז. מפורסמת בזכות אטרקציות השלג בחורף, מצנחי רחיפה בקיץ, ואנדרטת הידידות הצופה אל תהום פראי.</p>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=400" class="dest-img" alt="קזבגי">
+            <div class="dest-info">
+                <h4>קזבגי והר בקאווקז (Kazbegi)</h4>
+                <p>הלב הפועם של הקווקז הגבוה. טיול ג'יפים חווייתי לפסגת הר קזבק, ביקור בכנסיית השילוש הקדושה (גרגטי) המבודדת הממוקמת בגובה עננים עוצר נשימה.</p>
             </div>
         </div>
 
         <div class="destination-card">
             <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=400" class="dest-img" alt="קולינריה גאורגית">
             <div class="dest-info">
-                <h4>תרבות היין והקולינריה (Khachapuri & Wine)</h4>
-                <p>מסע קולינרי בשילוב המאפים המקומיים המפורסמים וביקור ביקבי בוטיק אותנטיים בחבל קאחטי, המייצרים יין בכדי חרס לפי מסורת עתיקה.</p>
+                <h4>חבל היין קאחטי וקולינריה אותנטית</h4>
+                <p>ערש הולדת היין העולמי. סדנאות להכנת חצ'אפורי וחינקלי, סיורי טעימות ביקבי בוטיק משפחתיים ואירוח כפרי גאורגי מסורתי וחם (סופרה).</p>
             </div>
         </div>
 
@@ -154,14 +165,14 @@
             </div>
         </div>
 
-        <div id="deals-sec" class="section-title">דילים וחבילות נבחרות</div>
-        <div class="section-subtitle">החבילות המבוקשות ביותר (המחיר כולל טיסות ומלונות)</div>
+        <div id="deals-sec" class="section-title">דילים וחבילות נבחרות (5 חבילות מובילות)</div>
+        <div class="section-subtitle">החבילות המבוקשות ביותר (המחיר כולל טיסות, מלונות וליווי)</div>
         
         <div class="deal-card">
             <div class="deal-img-box" style="background-image: url('https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=600');"></div>
             <div class="deal-padding">
                 <div class="deal-header">
-                    <span class="deal-tag">סופ"ש עירוני וקולינרי</span>
+                    <span class="deal-tag">סופ"ש קולינרי</span>
                     <span class="deal-price">649$</span>
                 </div>
                 <div class="deal-title">חבילת בוטיק קולינרית בטביליסי</div>
@@ -171,7 +182,7 @@
                     <li><i class="fa-solid fa-circle-check"></i> סיור אוכל ויין פרטי עם מדריך מקומי בשווקים הנסתרים</li>
                     <li><i class="fa-solid fa-circle-check"></i> העברות פרטיות משדה התעופה ישירות למלון ובחזרה</li>
                 </ul>
-                <a href="https://api.whatsapp.com/send?phone=972528989677&text=%D7%94%D7%99%D7%99%20%D7%92%D7%91%D7%99%20%D7%90%D7%A9%D7%94%D7%99%20%D7%A4%D7%A8%D7%95%D7%99%D7%A7%D7%98" target="_blank" class="btn btn-deal">בדיקת זמינות ותאריכים</a>
+                <a href="https://api.whatsapp.com/send?phone=972528989677&text=היי גבי, אשמח לפרטים על חבילת הבוטיק הקולינרית בטביליסי" target="_blank" class="btn btn-deal">בדיקת זמינות ותאריכים</a>
             </div>
         </div>
 
@@ -179,17 +190,68 @@
             <div class="deal-img-box" style="background-image: url('https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=600');"></div>
             <div class="deal-padding">
                 <div class="deal-header">
-                    <span class="deal-tag">הרפתקה וטבע פראי</span>
+                    <span class="deal-tag">הרפתקה ושטח</span>
                     <span class="deal-price">1,199$</span>
                 </div>
-                <div class="deal-title">טיול ג'יפים חווייתי בקווקז הגבוה והרי גודאורי</div>
+                <div class="deal-title">טיול ג'יפים חווייתי בקווקז הגבוה וקזבגי</div>
                 <ul class="deal-list">
                     <li><i class="fa-solid fa-circle-check"></i> טיסות ישירות והעברות שדה מלאות</li>
                     <li><i class="fa-solid fa-circle-check"></i> 6 לילות בריזורטים מול נוף הפסגות בקזבגי וגודאורי</li>
                     <li><i class="fa-solid fa-circle-check"></i> רכב ג'יפ 4X4 מרווח וחדיש צמוד אליכם לכל התקופה</li>
                     <li><i class="fa-solid fa-circle-check"></i> ספר מסלול דיגיטלי אישי עם מפות והמלצות אטרקציות</li>
                 </ul>
-                <a href="https://api.whatsapp.com/send?phone=972528989677&text=%D7%94%D7%99%D7%99%20%D7%92%D7%91%D7%99%20%D7%90%D7%A9%D7%94%D7%99%20%D7%A4%D7%A8%D7%95%D7%99%D7%A7%D7%98" target="_blank" class="btn btn-deal">בדיקת זמינות ותאריכים</a>
+                <a href="https://api.whatsapp.com/send?phone=972528989677&text=היי גבי, אשמח לפרטים על טיול הג'יפים לקווקז וקזבגי" target="_blank" class="btn btn-deal">בדיקת זמינות ותאריכים</a>
+            </div>
+        </div>
+
+        <div class="deal-card">
+            <div class="deal-img-box" style="background-image: url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600');"></div>
+            <div class="deal-padding">
+                <div class="deal-header">
+                    <span class="deal-tag">חופשת חורף / סקי</span>
+                    <span class="deal-price">899$</span>
+                </div>
+                <div class="deal-title">חופשת שלג וסקי פרימיום בגודאורי</div>
+                <ul class="deal-list">
+                    <li><i class="fa-solid fa-circle-check"></i> טיסות ישירות כולל ציוד סקי מלא מובנה</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 5 לילות במלון ספא יוקרתי עם גישה ישירה למסלולים (Ski-In/Ski-Out)</li>
+                    <li><i class="fa-solid fa-circle-check"></i> העברות ברכבי שטח קבוצתיים מותאמים לשלג מטביליסי</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send?phone=972528989677&text=היי גבי, אשמח לפרטים על חופשת הסקי בגודאורי" target="_blank" class="btn btn-deal">בדיקת זמינות ותאריכים</a>
+            </div>
+        </div>
+
+        <div class="deal-card">
+            <div class="deal-img-box" style="background-image: url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600');"></div>
+            <div class="deal-padding">
+                <div class="deal-header">
+                    <span class="deal-tag">טיול בוטיק זוגי</span>
+                    <span class="deal-price">949$</span>
+                </div>
+                <div class="deal-title">ירח דבש רומנטי: טביליסי וחבל היין קאחטי</div>
+                <ul class="deal-list">
+                    <li><i class="fa-solid fa-circle-check"></i> 5 לילות במלונות חמישה כוכבים משובחים במיוחד</li>
+                    <li><i class="fa-solid fa-circle-check"></i> נהג צמוד ורכב פרטי לאורך כל הימים והסיורים</li>
+                    <li><i class="fa-solid fa-circle-check"></i> ארוחת ערב רומנטית אקסקלוסיבית וטעימות יין פרטיות ביקב עתיק</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send?phone=972528989677&text=היי גבי, אשמח לפרטים על הטיול הזוגי הרומנטי לקאחטי וטביליסי" target="_blank" class="btn btn-deal">בדיקת זמינות ותאריכים</a>
+            </div>
+        </div>
+
+        <div class="deal-card">
+            <div class="deal-img-box" style="background-image: url('https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=600');"></div>
+            <div class="deal-padding">
+                <div class="deal-header">
+                    <span class="deal-tag">הכל כלול למשפחות</span>
+                    <span class="deal-price">799$ <small>/ לאדם</small></span>
+                </div>
+                <div class="deal-title">חופשת משפחות מורחבת: טבע, אטרקציות ועירוני</div>
+                <ul class="deal-list">
+                    <li><i class="fa-solid fa-circle-check"></i> טיסות ישירות בשעות נוחות ואוטובוס תיירים צמוד למשפחה</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 7 לילות במלונות משפחתיים הכוללים ארוחות בוקר וערב מלאות</li>
+                    <li><i class="fa-solid fa-circle-check"></i> כניסה מובנית לכל פארקי החבלים, רכבלים וסיורי השטח המקומיים</li>
+                </ul>
+                <a href="https://api.whatsapp.com/send?phone=972528989677&text=היי גבי, אשמח לפרטים על חבילת המשפחות המורחבת לגאורגיה" target="_blank" class="btn btn-deal">בדיקת זמינות ותאריכים</a>
             </div>
         </div>
 
@@ -252,6 +314,42 @@
                 </div>
             </div>
         </div>
+
+        <div class="review-card">
+            <i class="fa-solid fa-quote-left"></i>
+            <p class="review-text">"הגענו לגבי במטרה לעשות סיור קולינרי ותרבותי בטביליסי. הדיל היה מעולה, המלון היה ברמה גבוהה מאוד וההמלצות של גבי על המסעדות המקומיות היו פשוט בינגו! נחזור בטוח."</p>
+            <div class="review-user">
+                <div class="review-avatar">מ</div>
+                <div>
+                    <h5 style="font-size: 13px; font-weight: bold;">מיכל ודוד שפירא</h5>
+                    <span style="font-size: 11px; color: #94a3b8;">חופשה זוגית בטביליסי</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <i class="fa-solid fa-quote-left"></i>
+            <p class="review-text">"חזרנו שבוע שעבר מחופשת סקי משפחתית מטורפת בגודאורי שגבי ארגן לנו. המלון עם הספא מול השלג היה חלום, וההעברות הפרטיות חסכו לנו המון כאב ראש עם הילדים והציוד. פשוט מקצוען."</p>
+            <div class="review-user">
+                <div class="review-avatar">א</div>
+                <div>
+                    <h5 style="font-size: 13px; font-weight: bold;">משפחת אלקיים</h5>
+                    <span style="font-size: 11px; color: #94a3b8;">חופשת שלג בגודאורי</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <i class="fa-solid fa-quote-left"></i>
+            <p class="review-text">"אין מילים להודות לגבי על הטיול האתגרי לקזבגי. הטיול ג'יפים היה מתוכנן בקפידה, המדריכים בשטח היו אלופים והנופים של הקווקז פשוט השאירו אותנו עם פה פתוח. ליווי אישי ברמה הגבוהה ביותר."</p>
+            <div class="review-user">
+                <div class="review-avatar">י</div>
+                <div>
+                    <h5 style="font-size: 13px; font-weight: bold;">יניב קליין</h5>
+                    <span style="font-size: 11px; color: #94a3b8;">טיול שטח אתגרי בקזבגי</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -259,10 +357,6 @@
         <p>סוכן אישי: גבי שמש | מייל: ss@gmail.com</p>
         <p style="font-size: 10px; color: #64748b; margin-top: 15px;">© כל הזכויות שמורות לסאני טורס.</p>
     </footer>
-
-    <a href="https://api.whatsapp.com/send?phone=972528989677&text=%D7%94%D7%99%D7%99%20%D7%92%D7%91%D7%99" target="_blank" class="whatsapp-float">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
 
     <script>
         let summary = { הרכב: '', סגנון: '' };
@@ -277,12 +371,4 @@
         function sendQuizForm() {
             let name = document.getElementById('q-name').value;
             let phone = document.getElementById('q-phone').value;
-            if(!name || !phone) { alert('אנא מלאו שם מלא ומספר טלפון'); return; }
-            let msg = `היי גבי שמש, יש לך ליד חדש מסאני טורס!\n\nשם: ${name}\nטלפון: ${phone}\nהרכב: ${summary['הרכב']}\nסגנון: ${summary['סגנון']}`;
-            window.open("https://api.whatsapp.com/send?phone=972528989677&text=" + encodeURIComponent(msg), '_blank');
-            document.getElementById('q-step-3').classList.add('hidden');
-            document.getElementById('q-step-thanks').classList.remove('hidden');
-        }
-    </script>
-</body>
-</html>
+            if(!name || !
