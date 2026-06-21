@@ -1,466 +1,178 @@
-הנה הקוד המלא, המודרני והמשוכלל לדף הנחיתה של גבי שמש ו-**Sunny Tours**.
-
-כדי שיהיה לך הכי קל שבעולם לעדכן אותו בהמשך, בניתי אותו בדיוק כפי שהצעתי – **בשני חלקים בתוך אותו קובץ**:
-
-1. **חלק 1: מבנה הנתונים (ה-Hooks):** ממש בתחילת הקוד (בתוך תגיות ה-`<script>`), ריכזתי את כל התוכן הדינמי – הפרטים של גבי, הדילים המומצאים לגאורגיה, הקישורים לתמונות וההמלצות. החבר יוכל לשנות שם מחיר או טקסט תוך שנייה.
-2. **חלק 2: העיצוב והמנגנון:** מבוסס על **Tailwind CSS** העדכני. הוא רספונסיבי לחלוטין (נראה מושלם ומקצועי בנייד), כולל שאלון התאמה אינטראקטיבי מתפקד, אקורדיון שאלות נפוצות וכפתור וואטסאפ צף שמחובר ישירות למספר של גבי.
-
-### מה צריך לעשות?
-
-1. תעתיק את כל הקוד שנמצא בתיבה למטה.
-2. בתוך המאגר שלך ב-GitHub, תיצור קובץ חדש בשם `index.html`.
-3. תדביק את הקוד בפנים ותשמור (`Commit changes`).
-4. תפעיל את GitHub Pages בהגדרות – ותוך 2 דקות האתר באוויר!
-
-```html
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunny Tours | גאורגיה שעוד לא הכרתם</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Google Fonts: Heebo -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
+    <title>Sunny Tours | סאני טורס</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Heebo', sans-serif; scroll-behavior: smooth; }
+        /* עיצוב משלנו שלא תלוי בשום שרת חיצוני ולא יכול להישבר */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; text-align: right; direction: rtl; }
+        
+        /* מבנה הנייד */
+        .container { width: 100%; max-width: 600px; mx-auto; padding: 20px; margin: 0 auto; }
+        
+        /* מסך פתיחה */
+        .hero { background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); color: white; padding: 40px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .badge { background-color: #f59e0b; color: #0f172a; display: inline-block; padding: 6px 16px; rounded-radius: 20px; font-weight: bold; font-size: 14px; border-radius: 20px; margin-bottom: 15px; }
+        .hero h1 { font-size: 28px; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
+        .hero p { font-size: 16px; color: #cbd5e1; margin-bottom: 20px; }
+        
+        /* כפתורים */
+        .btn { display: block; width: 100%; background-color: #f59e0b; color: #0f172a; text-align: center; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 18px; text-decoration: none; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); }
+        .btn-secondary { background-color: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); box-shadow: none; }
+        
+        /* כרטיס סוכן */
+        .agent-card { background: white; border-radius: 20px; padding: 20px; margin-top: -20px; margin-bottom: 25px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; text-align: center; }
+        .agent-image-holder { width: 100px; h-height: 100px; width: 100px; height: 100px; background-color: #cbd5e1; border-radius: 50%; margin: 0 auto 15px auto; overflow: hidden; border: 3px solid #f59e0b; display: flex; align-items: center; justify-content: center; }
+        .agent-image-holder i { font-size: 40px; color: #64748b; }
+        .agent-image-holder img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* קוביות דילים */
+        .section-title { font-size: 20px; font-weight: 800; margin: 25px 0 15px 0; color: #0f172a; border-right: 4px solid #f59e0b; padding-right: 10px; }
+        .deal-card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 15px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+        .deal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .deal-tag { background: #fef3c7; color: #b45309; padding: 4px 10px; border-radius: 8px; font-size: 12px; font-weight: bold; }
+        .deal-price { font-size: 22px; font-weight: 900; color: #1e3a8a; }
+        .deal-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; color: #0f172a; }
+        .deal-list { list-style: none; }
+        .deal-list li { font-size: 14px; color: #475569; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .deal-list li i { color: #10b981; }
+        .btn-deal { background: #0f172a; color: white; padding: 10px; font-size: 14px; margin-top: 15px; margin-bottom: 0; }
+
+        /* שאלון */
+        .quiz-box { background: #1e293b; color: white; padding: 20px; border-radius: 20px; margin-bottom: 25px; }
+        .quiz-step h3 { font-size: 16px; color: #f59e0b; margin-bottom: 15px; }
+        .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .quiz-opt { background: #334155; border: none; color: white; padding: 12px; rounded: 10px; font-weight: bold; border-radius: 10px; cursor: pointer; text-align: center; }
+        .quiz-input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #475569; background: #334155; color: white; margin-bottom: 10px; text-align: right; }
+        .hidden { display: none; }
+
+        /* כפתור וואטסאפ צף קבוע */
+        .whatsapp-float { position: fixed; bottom: 20px; left: 20px; width: 60px; height: 60px; background-color: #25d366; color: white; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body>
 
-    <!-- ========================================== -->
-    <!--  חלק 1: מבנה הנתונים (HOOKS לעדכון קל)  -->
-    <!-- ========================================== -->
-    <script>
-        const SITE_DATA = {
-            // פרטי הסוכן והעסק
-            agent: {
-                name: "גבי שמש",
-                company: "סאני טורס - Sunny Tours",
-                phone: "+97252-898-9677",
-                whatsapp: "972528989677", // ללא פלוס ומקפים בשביל הקישור
-                email: "ss@gmail.com",
-                image: "agent.jpg" // אם יש תמונה אמיתית, לקרוא לה ככה ולהעלות לגיטהאב. כרגע יש פלייסהולדר בקוד.
-            },
-            
-            // 3 הדילים המובילים (ניתן לשנות טקסטים ומחירים כאן)
-            deals: [
-                {
-                    id: 1,
-                    title: "סופ״ש קולינרי ותרבותי בטביליסי",
-                    tag: "הפופולרי ביותר",
-                    image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&w=600&q=80", // טביליסי/נוף
-                    duration: "4 ימים / 3 לילות",
-                    price: "649$",
-                    includes: ["טיסות ישירות כולל כבודה", "מלון בוטיק 4 כוכבים במרכז העיר", "סיור שווקים קולינרי עם מדריך מקומי", "העברות פרטיות משדה התעופה"],
-                },
-                {
-                    id: 2,
-                    title: "חווית ג׳יפים וטבע בקווקז הגבוה",
-                    tag: "לחובבי הרפתקאות",
-                    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80", // הרים
-                    duration: "7 ימים / 6 לילות",
-                    price: "1,199$",
-                    includes: ["טיסות והעברות", "ג׳יפ 4X4 חדיש צמוד לכל התקופה", "מלונות בוטיק ואירוח כפרי אותנטי", "מסלול שטח בלעדי (קזבגי ומסטיה)"],
-                },
-                {
-                    id: 3,
-                    title: "טעימות יין ורוגע בחבל קאחטי",
-                    tag: "חופשת פרימיום",
-                    image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80", // יין/כרם
-                    duration: "5 ימים / 4 לילות",
-                    price: "899$",
-                    includes: ["טיסות ישירות", "אירוח בריזורט ספא יוקרתי בין הכרמים", "סדנת בישול מקומי וטעימות ביקב עתיק", "נהג ומדריך פרטי צמודים"],
-                }
-            ],
-
-            // המלצות לקוחות
-            testimonials: [
-                {
-                    name: "רונית ואילן כהן",
-                    location: "ראשון לציון",
-                    text: "גבי בנה לנו טיול משפחתי מושלם לגאורגיה! המלונות היו בדיוק בטעם שלנו, והזמינות שלו בוואטסאפ לכל שאלה במהלך הטיול נתנה לנו שקט נפשי מטורף. מומלץ בחום!",
-                    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
-                },
-                {
-                    name: "תומר לוי",
-                    location: "תל אביב",
-                    text: "סגרנו דרך סאני טורס טיול ג'יפים עם חברים לקווקז. הכל תוקתק מאלף עד ת'. המסלול שגבי בנה לקח אותנו למקומות נסתרים שבחיים לא היינו מגיעים אליהם לבד.",
-                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
-                }
-            ]
-        };
-    </script>
-
-
-    <!-- ========================================== -->
-    <!--  חלק 2: מבנה העמוד והעיצוב (HTML & UI)      -->
-    <!-- ========================================== -->
-
-    <!-- מסך ראשון - HERO -->
-    <header class="relative h-[90vh] md:h-screen flex items-center justify-center bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), url('https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=1920&q=80');">
-        <div class="container mx-auto px-4 text-center text-white z-10">
-            <div class="inline-block bg-amber-500 text-slate-900 text-sm font-bold px-4 py-1.5 rounded-full mb-4 shadow-lg uppercase tracking-wider">
-                <script>document.write(SITE_DATA.agent.company);</script>
-            </div>
-            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight drop-shadow-md">
-                גאורגיה שעוד לא הכרתם,<br><span class="text-amber-400">בהתאמה אישית מושלמת</span>
-            </h1>
-            <p class="text-lg md:text-2xl max-w-2xl mx-auto mb-8 text-slate-200 font-light drop-shadow-sm">
-                חבילות בוטיק וטיולים מותאמים אישית עם סוכן פרטי שמכיר כל סמטה, נוף וטעמים מקומיים. אתם רק תארזו, אנחנו נדאג לכל השאר.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#quiz" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-lg px-8 py-4 rounded-xl shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
-                    <i class="fa-solid fa-compass ml-2">
-</i>התאמת טיול ב-3 שאלות
-                </a>
-                <a href="#deals" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-medium text-lg px-8 py-4 rounded-xl border border-white/30 backdrop-blur-sm transition-all duration-300 text-center">
-                    צפייה בדילים החמים
-                </a>
-            </div>
-        </div>
-        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white/50 animate-bounce text-2xl hidden md:block">
-            <i class="fa-solid fa-chevron-down"></i>
-        </div>
-    </header>
-
-    <!-- אזור אמינות והיכרות עם הסוכן -->
-    <section class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-4 max-w-5xl">
-            <div class="grid md:grid-cols-12 gap-12 items-center">
-                <div class="md:col-span-5 relative flex justify-center">
-                    <div class="absolute inset-0 bg-amber-500 rounded-3xl transform rotate-3 max-w-[320px] md:max-w-full w-full h-[350px]"></div>
-                    <!-- כאן משולב פלייסהולדר חכם, אם תעלה קובץ agent.jpg הוא יתחלף אוטומטית -->
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&h=450&q=80" onerror="this.src='https://placehold.co/400x450/e2e8f0/1e293b?text=%D7%92%D7%91%D7%99+%D7%A9%D7%9E%D7%A9'" alt="גבי שמש" class="relative rounded-3xl object-cover shadow-2xl max-w-[320px] md:max-w-full w-full h-[350px] z-10 bg-slate-200">
-                </div>
-                <div class="md:col-span-7 text-center md:text-right">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2">נעים להכיר, אני <span class="text-amber-500"><script>document.write(SITE_DATA.agent.name);</script></span></h2>
-                    <p class="text-amber-600 font-semibold mb-6 text-lg"><script>document.write(SITE_DATA.agent.company);</script></p>
-                    <div class="space-y-4 text-slate-600 text-lg leading-relaxed">
-                        <p>
-                            אחרי שנים של התאהבות עמוקה בגאורגיה – בנופים הפראיים, בתרבות האירוח החמה ובקולינריה המשובחת – החלטתי להפוך את התשוקה שלי לשירות שמביא לכם את גאורגיה האמיתית.
-                        </p>
-                        <p>
-                            כסוכן נסיעות פרטי, אני לא מוכר לכם "חבילות מדף" המוניות. אני תופר כל דיל ומסלול בדיוק לפי התקציב, הקצב והחלומות שלכם. 
-                        </p>
-                        <p class="font-medium text-slate-900">
-                            למה לסגור איתי ולא באתרי ההזמנות הגדולים?
-                        </p>
-                        <ul class="space-y-2 grid grid-cols-1 sm:grid-cols-2 text-sm md:text-base pt-2">
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> מלונות שנבחרו ונבדקו על ידי אישית</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> זמינות מלאה בוואטסאפ בזמן הטיול</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> פינות חבויות ומסעדות אותנטיות</li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> מחירים תחרותיים ללא הפתעות</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- אזור הדילים והחבילות -->
-    <section id="deals" class="py-16 md:py-24 bg-slate-100">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4">הדילים המובילים שלנו לעונה</h2>
-                <p class="text-slate-600 text-lg">בחר את סגנון החופשה שלך. כל החבילות ניתנות לשינוי והתאמה אישית מלאה.</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto" id="deals-container">
-                <!-- הדילים מוזרקים כאן דינמית על ידי ה-JS למטה -->
-            </div>
-        </div>
-    </section>
-
-    <!-- אלמנט משוכלל: שאלון התאמה אינטראקטיבי MULTI-STEP -->
-    <section id="quiz" class="py-16 md:py-24 bg-slate-900 text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80');"></div>
-        <div class="container mx-auto px-4 max-w-3xl relative z-10">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-black mb-4">בוא נבנה את הטיול המושלם עבורך</h2>
-                <p class="text-slate-400">ענה על 3 שאלות קצרות וגבי יחזור אליך עם הצעה מותאמת אישית</p>
-            </div>
-
-            <div class="bg-slate-800 p-6 md:p-10 rounded-2xl shadow-2xl border border-slate-700">
-                <!-- פרוגרס בר -->
-                <div class="w-full bg-slate-700 h-2 rounded-full mb-8 overflow-hidden">
-                    <div id="progress-bar" class="bg-amber-500 h-full w-1/3 transition-all duration-300"></div>
-                </div>
-
-                <!-- שלב 1 -->
-                <div id="step-1" class="quiz-step">
-                    <h3 class="text-xl font-bold mb-6 text-amber-400">1. עם מי אתה מתכנן לטייל?</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <button onclick="nextStep(2, 'בזוג')" class="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-medium transition-all text-center flex flex-col items-center gap-2 border border-transparent hover:border-amber-500"><i class="fa-solid fa-heart text-2xl text-amber-400"></i> בזוג</button>
-                        <button onclick="nextStep(2, 'משפחה עם ילדים')" class="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-medium transition-all text-center flex flex-col items-center gap-2 border border-transparent hover:border-amber-500"><i class="fa-solid fa-child-holding-hand text-2xl text-amber-400"></i> משפחה עם ילדים</button>
-                        <button onclick="nextStep(2, 'קבוצת חברים')" class="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-medium transition-all text-center flex flex-col items-center gap-2 border border-transparent hover:border-amber-500"><i class="fa-solid fa-users text-2xl text-amber-400"></i> קבוצת חברים</button>
-                        <button onclick="nextStep(2, 'מטייל בודד')" class="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-medium transition-all text-center flex flex-col items-center gap-2 border border-transparent hover:border-amber-500"><i class="fa-solid fa-user text-2xl text-amber-400"></i> מטייל בודד</button>
-                    </div>
-                </div>
-
-                <!-- שלב 2 -->
-                <div id="step-2" class="quiz-step hidden">
-                    <h3 class="text-xl font-bold mb-6 text-amber-400">2. מה סגנון החופשה המועדף עליך?</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <button onclick="nextStep(3, 'נופים וטבע')" class="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-medium transition-all text-center flex flex-col items-center gap-2 border border-transparent hover:border-amber-500"><i class="fa-solid fa-mountain text-2xl text-amber-400"></i> נופים וטבע</button>
-                        <button onclick="nextStep(3, 'קולינריה, שווקים ויין')" class="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-medium transition-all text-center flex flex-col items-center gap-2 border border-transparent hover:border-amber-500"><i class="fa-solid fa-utensils text-2xl text-amber-400"></i> קולינריה ויין</button>
-                        <button onclick="nextStep(3, 'אקסטרים וג׳יפים')" class="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-medium transition-all text-center flex flex-col items-center gap-2 border border-transparent hover:border-amber-500"><i class="fa-solid fa-truck-monster text-2xl text-amber-400"></i> אקסטרים וג׳יפים</button>
-                        <button onclick="nextStep(3, 'בטן-גב ותרבות')" class="p-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-medium transition-all text-center flex flex-col items-center gap-2 border border-transparent hover:border-amber-500"><i class="fa-solid fa-hotel text-2xl text-amber-400"></i> בטן-גב ותרבות</button>
-                    </div>
-                    <button onclick="prevStep(1)" class="mt-6 text-sm text-slate-400 hover:text-white underline"><i class="fa-solid fa-arrow-right ml-1"></i> חזור שלב</button>
-                </div>
-
-                <!-- שלב 3 - טופס השארת פרטים -->
-                <div id="step-3" class="quiz-step hidden">
-                    <h3 class="text-xl font-bold mb-2 text-amber-400">מצוין! מתי מתכננים לטוס?</h3>
-                    <p class="text-slate-400 text-sm mb-6">השאר פרטים וגבי יבנה לך את ההצעה המנצחת</p>
-                    
-                    <form id="lead-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                        <!-- שדות מוסתרים לשמירת הבחירות מהשאלון -->
-                        <input type="hidden" id="quiz-companions" name="companions">
-                        <input type="hidden" id="quiz-style" name="style">
-
-                        <div>
-                            <label class="block text-sm font-medium mb-1 text-slate-300">מתי מתוכנן הטיול?</label>
-                            <select id="quiz-date" required class="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500">
-                                <option value="">בחר תקופה...</option>
-                                <option value="בחודש הקרוב">בחודש הקרוב</option>
-                                <option value="בחודשי הקיץ">בחודשי הקיץ</option>
-                                <option value="תקופת החגים">תקופת החגים</option>
-                                <option value="עדיין לא יודע">עדיין לא סגור על תאריך</option>
-                            </select>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-1 text-slate-300">שם מלא *</label>
-                                <input type="text" id="quiz-name" required class="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-1 text-slate-300">טלפון נייד *</label>
-                                <input type="tel" id="quiz-phone" required class="w-full bg-slate-700 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 text-right" dir="ltr">
-                            </div>
-                        </div>
-                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-4 rounded-xl text-lg transition-all shadow-lg mt-4">
-                            שלח לגבי וקבל הצעה בוואטסאפ <i class="fa-brands fa-whatsapp mr-1"></i>
-                        </button>
-                    </form>
-                    <button onclick="prevStep(2)" class="mt-6 text-sm text-slate-400 hover:text-white underline"><i class="fa-solid fa-arrow-right ml-1"></i> חזור שלב</button>
-                </div>
-
-                <!-- מסך תודה רבה -->
-                <div id="step-thanks" class="quiz-step hidden text-center py-8">
-                    <div class="w-16 h-16 bg-green-500/20 text-green-400 text-3xl rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa-solid fa-check"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2 text-white">הפרטים התקבלו בהצלחה!</h3>
-                    <p class="text-slate-300 max-w-md mx-auto mb-6">תודה רבה. גבי משמש סאני טורס יחזור אליך בהקדם האפשרי עם הצעה מותאמת אישית לפרטים שבחרת.</p>
-                    <button onclick="resetQuiz()" class="text-amber-400 text-sm hover:underline">התחל שאלון מחדש</button>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- אזור המלצות (SOCIAL PROOF) -->
-    <section class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-4">לקוחות מרוצים מספרים</h2>
-                <p class="text-slate-600">החוויה של המטיילים שלנו היא כרטיס הביקור הטוב ביותר של סאני טורס.</p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto" id="testimonials-container">
-                <!-- המלצות מוזרקות כאן דינמית -->
-            </div>
-        </div>
-    </section>
-
-    <!-- אזור שאלות נפוצות (FAQ) -->
-    <section class="py-16 bg-slate-50 border-t border-slate-200">
-        <div class="container mx-auto px-4 max-w-3xl">
-            <h2 class="text-3xl font-black text-center text-slate-900 mb-12">שאלות ותשובות נפוצות</h2>
-            <div class="space-y-4">
-                <!-- שאלה 1 -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(1)" class="w-full text-right p-5 font-bold text-slate-800 flex justify-between items-center hover:bg-slate-50 transition-colors">
-                        <span>האם המחיר כולל ליווי וזמינות של הסוכן במהלך השהות?</span>
-                        <i id="faq-icon-1" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-                    </button>
-                    <div id="faq-ans-1" class="hidden p-5 border-t border-slate-100 text-slate-600 bg-slate-50/50 leading-relaxed">
-                        כן, בהחלט! היתרון הגדול ביותר בסגירה מול סוכן פרטי כמו גבי שמש הוא הליווי הצמוד. אתם מקבלים מענה ישיר בוואטסאפ לכל שאלה, שינוי או צורך בזמן אמת במהלך הטיול שלכם בגאורגיה.
-                    </div>
-                </div>
-                <!-- שאלה 2 -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(2)" class="w-full text-right p-5 font-bold text-slate-800 flex justify-between items-center hover:bg-slate-50 transition-colors">
-                        <span>האם ניתן לבצע שינויים במסלולים המוצעים באתר?</span>
-                        <i id="faq-icon-2" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-                    </button>
-                    <div id="faq-ans-2" class="hidden p-5 border-t border-slate-100 text-slate-600 bg-slate-50/50 leading-relaxed">
-                        כמובן. כל החבילות והדילים המוצגים כאן הם נקודת פתיחה והשראה בלבד. אנחנו מתאימים את כמות הימים, דרגת המלונות וסגנון האטרקציות באופן אישי לחלוטין עבורכם.
-                    </div>
-                </div>
-                <!-- שאלה 3 -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(3)" class="w-full text-right p-5 font-bold text-slate-800 flex justify-between items-center hover:bg-slate-50 transition-colors">
-                        <span>איך מתבצע תהליך התשלום והסליקה?</span>
-                        <i id="faq-icon-3" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-200"></i>
-                    </button>
-                    <div id="faq-ans-3" class="hidden p-5 border-t border-slate-100 text-slate-600 bg-slate-50/50 leading-relaxed">
-                        לאחר שנאשר יחד את תוכנית הטיול הסופית, התשלום יבוצע בצורה מאובטחת באמצעות כרטיס אשראי או העברה בנקאית לפי בחירתכם, בהתאם לתנאי חברת התעופה והמלונות.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- פוטר (סגירת העמוד) -->
-    <footer class="bg-slate-900 text-slate-400 py-12 text-center border-t border-slate-800 text-sm">
-        <div class="container mx-auto px-4 space-y-4">
-            <p class="text-white font-bold text-base"><script>document.write(SITE_DATA.agent.company);</script></p>
-            <p>סוכן נסיעות פרטי: <script>document.write(SITE_DATA.agent.name);</script> | טלפון: <script>document.write(SITE_DATA.agent.phone);</script> | מייל: <script>document.write(SITE_DATA.agent.email);</script></p>
-            <div class="w-16 h-px bg-slate-700 mx-auto my-4"></div>
-            <p>© <script>document.write(new Date().getFullYear());</script> כל הזכויות שמורות ל-Sunny Tours. החבילות כפופות לתנאי הביטול ומדיניות החברה.</p>
-        </div>
-    </footer>
-
-    <!-- כפתור וואטסאפ צף מנצח -->
-    <div class="fixed bottom-6 right-6 z-50">
-        <a id="whatsapp-floating-btn" href="#" target="_blank" class="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center text-3xl shadow-2xl transition-all duration-300 transform hover:scale-110">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
+    <div class="hero">
+        <div class="badge">סאני טורס - Sunny Tours</div>
+        <h1>גאורגיה שעוד לא הכרתם!</h1>
+        <p>חופשות בוטיק ודילים מטורפים בהתאמה אישית</p>
+        <a href="#quiz-sec" class="btn"><i class="fa-solid fa-sliders ml-1"></i> התאמת טיול ב-3 שאלות</a>
     </div>
 
+    <div class="container">
 
-    <!-- ========================================== -->
-    <!--  לוגיקה ופונקציונליות (JAVASCRIPT)       -->
-    <!-- ========================================== -->
-    <script>
-        // 1. הזרקה דינמית של הדילים
-        const dealsContainer = document.getElementById('deals-container');
-        SITE_DATA.deals.forEach(deal => {
-            let includesList = deal.includes.map(inc => `<li class="flex items-start gap-2 text-sm text-slate-600"><i class="fa-solid fa-check text-green-500 mt-1"></i> <span>${inc}</span></li>`).join('');
-            
-            dealsContainer.innerHTML += `
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-200 flex flex-col transition-all duration-300 hover:shadow-xl">
-                    <div class="relative h-48 bg-slate-200">
-                        <img src="${deal.image}" alt="${deal.title}" class="w-full h-full object-cover">
-                        <span class="absolute top-4 right-4 bg-amber-500 text-slate-950 font-bold text-xs px-3 py-1 rounded-full shadow-md">${deal.tag}</span>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col">
-                        <span class="text-xs text-amber-600 font-bold mb-1"><i class="fa-regular fa-clock ml-1"></i> ${deal.duration}</span>
-                        <h3 class="text-xl font-bold text-slate-900 mb-4">${deal.title}</h3>
-                        <ul class="space-y-2 mb-6 flex-grow">
-                            ${includesList}
-                        </ul>
-                        <div class="pt-4 border-t border-slate-100 flex items-center justify-between mt-auto">
-                            <div>
-                                <span class="text-xs text-slate-400 block">מחיר החל מ-</span>
-                                <span class="text-2xl font-black text-slate-900">${deal.price}</span>
-                            </div>
-                            <a href="https://api.whatsapp.com/send?phone=${SITE_DATA.agent.whatsapp}&text=%D7%94%D7%99%D7%99%20%D7%92%D7%91%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%9A%D7%95%D7%A5%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%94%20%D7%94%D7%93%D7%99%D7%9C%3A%20%22${encodeURIComponent(deal.title)}%22" target="_blank" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm px-4 py-2.5 rounded-xl transition-all">
-                                פרטים בוואטסאפ
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
+        <div class="agent-card">
+            <div class="agent-image-holder" id="agent-img-box">
+                <img src="gabi.jpg" onerror="this.style.display='none';" alt="גבי שמש">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <h2 style="font-size: 20px; font-weight: bold;">גבי שמש</h2>
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 15px;">סוכן הנסיעות הפרטי שלך לגאורגיה</p>
+            <p style="font-size: 14px; color: #475569; line-net: 1.5;">
+                אני לא מוכר לכם חבילות המוניות. אני בונה לכם את הטיול לגאורגיה בדיוק לפי המידות שלכם, עם המלונות הכי טובים וזמינות מלאה בוואטסאפ לכל אורך הדרך.
+            </p>
+        </div>
 
-        // 2. הזרקה דינמית של ההמלצות
-        const testimonialsContainer = document.getElementById('testimonials-container');
-        SITE_DATA.testimonials.forEach(testi => {
-            testimonialsContainer.innerHTML += `
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 relative">
-                    <i class="fa-solid fa-quote-left text-slate-200 text-4xl absolute top-4 left-4"></i>
-                    <p class="text-slate-600 italic mb-6 relative z-10 leading-relaxed">"${testi.text}"</p>
-                    <div class="flex items-center gap-3">
-                        <img src="${testi.avatar}" alt="${testi.name}" class="w-10 h-10 rounded-full object-cover">
-                        <div>
-                            <h4 class="font-bold text-slate-900 text-sm">${testi.name}</h4>
-                            <span class="text-xs text-slate-400">${testi.location}</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-
-        // 3. הגדרת קישור כפתור הוואטסאפ הצף מהנתונים
-        document.getElementById('whatsapp-floating-btn').href = `https://api.whatsapp.com/send?phone=${SITE_DATA.agent.whatsapp}&text=%D7%94%D7%99%D7%99%20%D7%92%D7%91%D7%99%2C%20%D7%92%D7%95%D7%A9%D7%A9%20%D7%91%D7%93%D7%A3%20%D7%94%D7%A0%D7%97%D7%99%D7%AA%D7%94%20%D7%A9%D7%9C%D7%9A%20%D7%95%D7%90%D7%A0%D7%99%20%D7%9E%D7%97%D7%A4%D7%A9%20%D7%93%D7%99%D7%9C%20%D7%9C%D7%92%D7%90%D7%95%D7%A8%D7%92%D7%99%D7%94...`;
-
-        // 4. מנגנון שאלון ההתאמה (Multi-step Quiz)
-        let quizAnswers = { companions: '', style: '' };
+        <div class="section-title">הדילים החמים שלנו</div>
         
-        function nextStep(step, answerValue) {
-            if(step === 2) quizAnswers.companions = answerValue;
-            if(step === 3) quizAnswers.style = answerValue;
+        <div class="deal-card">
+            <div class="deal-header">
+                <span class="deal-tag">סופ"ש קולינרי</span>
+                <span class="deal-price">649$</span>
+            </div>
+            <div class="deal-title">חבילת בוטיק מפנקת בטביליסי</div>
+            <ul class="deal-list">
+                <li><i class="fa-solid fa-check"></i> טיסות ישירות כולל כבודה</li>
+                <li><i class="fa-solid fa-check"></i> מלון 4 כוכבים מרכזי ומבוקש</li>
+                <li><i class="fa-solid fa-check"></i> סיור שווקים וטעימות חצ'אפורי ויין</li>
+            </ul>
+            <a href="https://api.whatsapp.com/send?phone=972528989677&text=היי גבי, אשמח לפרטים על הסופש בקולינרי בטביליסי" target="_blank" class="btn btn-deal">אני רוצה פרטים בוואטסאפ</a>
+        </div>
 
-            // עדכון שדות נסתרים
-            document.getElementById('quiz-companions').value = quizAnswers.companions;
-            document.getElementById('quiz-style').value = quizAnswers.style;
+        <div class="deal-card">
+            <div class="deal-header">
+                <span class="deal-tag">לחובבי טבע</span>
+                <span class="deal-price">1,199$</span>
+            </div>
+            <div class="deal-title">טיול ג'יפים מטורף בקווקז הגבוה</div>
+            <ul class="deal-list">
+                <li><i class="fa-solid fa-check"></i> טיסות ישירות והעברות</li>
+                <li><i class="fa-solid fa-check"></i> ג'יפ חדיש 4X4 צמוד לכל התקופה</li>
+                <li><i class="fa-solid fa-check"></i> לינה במלונות נוף מרהיבים בקזבגי</li>
+            </ul>
+            <a href="https://api.whatsapp.com/send?phone=972528989677&text=היי גבי, אשמח לפרטים על טיול הג'יפים בקווקז" target="_blank" class="btn btn-deal">אני רוצה פרטים בוואטסאפ</a>
+        </div>
 
-            // החלפת מסכים
-            document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`step-${step}`).classList.remove('hidden');
-
-            // עדכון פרוגרס בר
-            const progress = document.getElementById('progress-bar');
-            if(step === 2) progress.style.width = '66%';
-            if(step === 3) progress.style.width = '100%';
-        }
-
-        function prevStep(step) {
-            document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`step-${step}`).classList.remove('hidden');
+        <div id="quiz-sec" class="section-title">בוא נתפור לך מסלול</div>
+        <div class="quiz-box">
             
-            const progress = document.getElementById('progress-bar');
-            if(step === 1) progress.style.width = '33%';
-            if(step === 2) progress.style.width = '66%';
-        }
+            <div id="q-step-1">
+                <h3 class="quiz-step">עם מי אתה מתכנן לטוס?</h3>
+                <div class="quiz-options">
+                    <button class="quiz-opt" onclick="setQuiz('הרכב', 'זוגי', 2)">بזוג <i class="fa-solid fa-heart"></i></button>
+                    <button class="quiz-opt" onclick="setQuiz('הרכב', 'משפחתי', 2)">משפחה <i class="fa-solid fa-child"></i></button>
+                </div>
+            </div>
 
-        function handleFormSubmit(e) {
-            e.preventDefault();
+            <div id="q-step-2" class="hidden">
+                <h3 class="quiz-step">מה הסגנון המועדף עליך?</h3>
+                <div class="quiz-options">
+                    <button class="quiz-opt" onclick="setQuiz('סגנון', 'אוכל ויין', 3)">אוכל ויין <i class="fa-solid fa-wine-glass"></i></button>
+                    <button class="quiz-opt" onclick="setQuiz('סגנון', 'נופים ושטח', 3)">נופים ושטח <i class="fa-solid fa-mountain"></i></button>
+                </div>
+            </div>
+
+            <div id="q-step-3" class="hidden">
+                <h3 class="quiz-step">למי גבי צריך לחזור?</h3>
+                <input type="text" id="q-name" class="quiz-input" placeholder="שם מלא">
+                <input type="tel" id="q-phone" class="quiz-input" placeholder="מספר טלפון">
+                <button class="btn" onclick="sendQuizForm()" style="margin-top: 10px;">שלח לגבי בוואטסאפ <i class="fa-brands fa-whatsapp"></i></button>
+            </div>
+
+            <div id="q-step-thanks" class="hidden" style="text-align: center; padding: 10px 0;">
+                <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 40px; margin-bottom: 10px;"></i>
+                <p>הפרטים נשלחו ישירות לוואטסאפ של גבי!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="https://api.whatsapp.com/send?phone=972528989677&text=היי גבי, הגעתי מהאתר ואשמח להתייעץ איתך על דיל לגאורגיה" target="_blank" class="whatsapp-float">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        let summary = { הרכב: '', סגנון: '' };
+
+        function setQuiz(key, value, nextStepNum) {
+            summary[key] = value;
+            document.getElementById('q-step-1').classList.add('hidden');
+            document.getElementById('q-step-2').classList.add('hidden');
+            document.getElementById('q-step-3').classList.add('hidden');
             
-            const name = document.getElementById('quiz-name').value;
-            const phone = document.getElementById('quiz-phone').value;
-            const date = document.getElementById('quiz-date').value;
-
-            // בניית הודעת הוואטסאפ האוטומטית שתישלח לגבי
-            const whatsappText = `היי גבי, ליד חדש הגיע מדף הנחיתה!\n\n` +
-                                 `👤 שם: ${name}\n` +
-                                 `📞 טלפון: ${phone}\n` +
-                                 `👥 הרכב: ${quizAnswers.companions}\n` +
-                                 `🌲 סגנון מועדף: ${quizAnswers.style}\n` +
-                                 `📅 מתי טסים: ${date}`;
-
-            // פתיחת חלון וואטסאפ ישיר לגבי עם הפרטים
-            const whatsappUrl = `https://api.whatsapp.com/send?phone=${SITE_DATA.agent.whatsapp}&text=${encodeURIComponent(whatsappText)}`;
-            window.open(whatsappUrl, '_blank');
-
-            // מעבר למסך תודה
-            document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
-            document.getElementById('step-thanks').classList.remove('hidden');
+            document.getElementById('q-step-' + nextStepNum).classList.remove('hidden');
         }
 
-        function resetQuiz() {
-            quizAnswers = { companions: '', style: '' };
-            document.getElementById('lead-form').reset();
-            prevStep(1);
-        }
+        function sendQuizForm() {
+            let name = document.getElementById('q-name').value;
+            let phone = document.getElementById('q-phone').value;
+            
+            if(!name || !phone) {
+                alert('אנא מלא שם וטלפון');
+                return;
+            }
 
-        // 5. מנגנון אקורדיון שאלות נפוצות
-        function toggleFaq(id) {
-            const ans = document.getElementById(`faq-ans-${id}`);
-            const icon = document.getElementById(`faq-icon-${id}`);
-            ans.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
+            let msg = `היי גבי, הגעתי מהאתר החדש שלך!\nשם: ${name}\nטלפון: ${phone}\nהרכב מטיילים: ${summary['הרכב']}\nסגנון מועדף: ${summary['סגנון']}`;
+            let url = "https://api.whatsapp.com/send?phone=972528989677&text=" + encodeURIComponent(msg);
+            
+            window.open(url, '_blank');
+            
+            document.getElementById('q-step-3').classList.add('hidden');
+            document.getElementById('q-step-thanks').classList.remove('hidden');
         }
     </script>
 </body>
 </html>
-
-```
